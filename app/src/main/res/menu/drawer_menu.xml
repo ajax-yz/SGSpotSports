@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
 
-        <item android:id="@+id/nav_map"
+        <item
+            android:id="@+id/nav_map"
             android:icon="@drawable/map256"
             android:title="@string/locator" />
 
-        <item android:id="@+id/nav_planner"
+        <item
+            android:id="@+id/nav_planner"
             android:icon="@drawable/calendar256"
             android:title="@string/planner" />
 
-        <item android:id="@+id/nav_kaki"
+        <item
+            android:id="@+id/nav_kaki"
             android:icon="@drawable/friendship256"
             android:title="@string/kaki" />
 
-        <item android:id="@+id/nav_tracker"
-            android:icon="@drawable/ActivityTracker256"
+        <item
+            android:id="@+id/nav_tracker"
+            android:icon="@drawable/tracker256"
             android:title="@string/tracker" />
 
     </group>
@@ -25,9 +31,10 @@
     <item android:title="@string/help">
         <menu>
 
-            <item android:id="@+id/nav_feedback"
-                android:icon="@drawable/ic_launcher_background"
-                android:title="@string/feedback"/>
+            <item
+                android:id="@+id/nav_feedback"
+                android:icon="@drawable/ic_feedback_black_24dp"
+                android:title="@string/feedback" />
 
         </menu>
     </item>

@@ -2,8 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item android:id="@+id/nav_message"
-            android:ion="@drawable/ic_menu"
-            android:title="Facility Locator"
+        <item android:id="@+id/nav_map"
+            android:icon="@drawable/map256"
+            android:title="Facility Locator" />
+
+        <item android:id="@+id/nav_planner"
+            android:icon="@drawable/calendar256"
+            android:title="Activity Planner" />
+
+        <item android:id="@+id/nav_kaki"
+            android:icon="@drawable/friendship256"
+            android:title="Kaki System" />
+
+        <item android:id="@+id/nav_tracker"
+            android:icon="@drawable/ActivityTracker256"
+            android:title="Activity Tracker" />
+
     </group>
 </menu>

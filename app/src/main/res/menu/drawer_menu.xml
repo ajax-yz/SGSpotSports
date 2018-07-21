@@ -5,29 +5,29 @@
 
         <item android:id="@+id/nav_map"
             android:icon="@drawable/map256"
-            android:title="Facility Locator" />
+            android:title="@string/locator" />
 
         <item android:id="@+id/nav_planner"
             android:icon="@drawable/calendar256"
-            android:title="Activity Planner" />
+            android:title="@string/planner" />
 
         <item android:id="@+id/nav_kaki"
             android:icon="@drawable/friendship256"
-            android:title="Kaki System" />
+            android:title="@string/kaki" />
 
         <item android:id="@+id/nav_tracker"
             android:icon="@drawable/ActivityTracker256"
-            android:title="Activity Tracker" />
+            android:title="@string/tracker" />
 
     </group>
 
 
-    <item android:title="Help">
+    <item android:title="@string/help">
         <menu>
 
             <item android:id="@+id/nav_feedback"
                 android:icon="@drawable/ic_launcher_background"
-                android:title="Feedback"/>
+                android:title="@string/feedback"/>
 
         </menu>
     </item>

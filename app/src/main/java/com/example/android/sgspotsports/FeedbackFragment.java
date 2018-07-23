@@ -38,8 +38,7 @@ public class FeedbackFragment extends Fragment {
     }
 
     private void sendMail(){
-        String recipient = getString(R.string.email);
-
+        String[] recipient = new String[] {getString(R.string.email)};
         String subject = mEditTextSubject.getText().toString();
         String message = mEditTextMessage.getText().toString();
 

@@ -12,6 +12,39 @@
         android:id="@+id/LocatorMap"
         tools:context=".MapsActivity"
         android:name="com.google.android.gms.maps.SupportMapFragment" />
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:elevation="10dp"
+        android:background="@color/icons"
+        android:id="@+id/searchLayout">
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:id="@+id/ic_magnify"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/ic_magnify"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/ic_magnify"
+            android:layout_centerVertical="true"
+            android:textSize="15sp"
+            android:textColor="@color/primary_text"
+            android:id="@+id/input_search"
+            android:background="@drawable/white_border"
+            android:hint="@string/search_hint"
+            android:imeOptions="actionSearch"
+            android:paddingStart="10dp"/>
+
+    </RelativeLayout>
+    
     <!--
     <TextView
         android:layout_width="wrap_content"

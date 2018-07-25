@@ -1,6 +1,8 @@
 package com.example.android.sgspotsports;
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -10,16 +12,21 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -30,9 +37,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-
 import java.io.IOException;
-import java.security.Key;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,12 +50,18 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback {
     private static final float DEFAULT_ZOOM = 15f;
 
     // variables
+    //public Context mContext;
     private Boolean mLocationPermissionsGranted = false;
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationProviderClient;
 
     // widgets
     private EditText mSearchText;
+    private ImageView mGps;
+
+    //public LocatorFragment(Context mContext) {
+        //this.mContext = mContext;
+    //}
 
     @Nullable
     @Override
@@ -66,10 +77,12 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback {
         super.onViewCreated(view, savedInstanceState);
 
         mSearchText = (EditText) view.findViewById(R.id.input_search);
+        mGps = (ImageView) view.findViewById(R.id.ic_gps);
         getLocationPermission();
     }
 
     @Override
+    // Commands after map is ready
     public void onMapReady(GoogleMap googleMap) {
 
         Toast.makeText(getActivity(), "Map is Ready", Toast.LENGTH_SHORT).show();
@@ -89,7 +102,7 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback {
             mMap.getUiSettings().setMyLocationButtonEnabled(false);
             mMap.getUiSettings().setMapToolbarEnabled(true);
             mMap.getUiSettings().setAllGesturesEnabled(true);
-            mMap.getUiSettings().setZoomControlsEnabled(true);
+            mMap.getUiSettings().setZoomControlsEnabled(false);
 
             init();
         }
@@ -104,6 +117,7 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback {
          */
     }
 
+    // Request for permission
     private void getLocationPermission() {
         Log.d(TAG, "getLocationPermission: getting location permissions");
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
@@ -127,7 +141,7 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback {
         }
     }
 
-
+    // Retrieves device's location
     private void getDeviceLocation() {
         Log.d(TAG, "getDeviceLocation: getting the device's current location");
 
@@ -143,7 +157,7 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback {
                             Log.d(TAG, "onComplete: found location!");
                             Location currentLocation = (Location) task.getResult();
                             moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
-                                    DEFAULT_ZOOM);
+                                    DEFAULT_ZOOM, "My Location");
 
                          } else {
                              Log.d(TAG, "onComplete: current location is null");
@@ -157,11 +171,23 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback {
         }
     }
 
-    private void moveCamera(LatLng latLng, float zoom) {
+    // Move the camera to a latlng point
+    private void moveCamera(LatLng latLng, float zoom, String title) {
         Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
+
+        if (!title.equals("My Location")) {
+            MarkerOptions options = new MarkerOptions()
+                    .position(latLng)
+                    .title(title);
+            mMap.addMarker(options);
+        }
+
+        hideSoftKeyboard();
+
     }
 
+    // Initialize map view
     private void initMap() {
 
         Log.d(TAG, "initMap: initializing map");
@@ -171,6 +197,7 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback {
         mapFragment.getMapAsync(this);
     }
 
+    // Initialize
     private void init() {
         Log.d(TAG, "init: initializing");
 
@@ -189,8 +216,21 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback {
                 return false;
             }
         });
+
+        // Once the image view ic_gps is clicked, move to device location
+        mGps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: clicked gps icon");
+                getDeviceLocation();
+            }
+        });
+
+        hideSoftKeyboard();
+
     }
 
+    // geoLocate based on what is being searched
     private void geoLocate() {
         Log.d(TAG, "geoLocate: geolocating");
 
@@ -208,11 +248,14 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback {
             Address address = list.get(0);
 
             Log.d(TAG, "geoLocate: found a location: " + address.toString());
-            Toast.makeText(getActivity(), address.toString(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), address.toString(), Toast.LENGTH_SHORT).show();
+
+            moveCamera(new LatLng(address.getLatitude(), address.getLongitude()), DEFAULT_ZOOM, address.getAddressLine(0));
         }
     }
 
     @Override
+    //Permissions for accessing device's location
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         Log.d(TAG, "onRequestPermissionsResult: called.");
         mLocationPermissionsGranted = false;
@@ -233,6 +276,15 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback {
                     initMap();
                 }
         }
+    }
+
+    // Hides the keyboard after searching
+    private void hideSoftKeyboard() {
+
+        FragmentActivity activity = getActivity();
+
+        InputMethodManager in = (InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(mSearchText.getWindowToken(), 0);
     }
 
 }

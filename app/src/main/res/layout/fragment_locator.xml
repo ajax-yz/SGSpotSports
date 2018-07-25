@@ -24,6 +24,7 @@
         android:id="@+id/searchLayout">
 
         <ImageView
+            android:contentDescription="@string/magnifying_glass"
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:id="@+id/ic_magnify"
@@ -31,9 +32,10 @@
             android:layout_marginStart="10dp"
             android:src="@drawable/ic_magnify"/>
         <EditText
+            android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_toRightOf="@id/ic_magnify"
+            android:layout_toEndOf="@id/ic_magnify"
             android:layout_centerVertical="true"
             android:textSize="15sp"
             android:textColor="@color/primary_text"
@@ -41,9 +43,23 @@
             android:background="@drawable/white_border"
             android:hint="@string/search_hint"
             android:imeOptions="actionSearch"
-            android:paddingStart="10dp"/>
+            android:paddingStart="10dp"
+            android:paddingEnd="0dp"/>
 
     </RelativeLayout>
+
+    <ImageView
+        android:contentDescription="@string/get_device_location"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="20dp"
+        android:padding="15dp"
+        android:scaleType="centerCrop"
+        android:id="@+id/ic_gps"
+        android:src="@drawable/ic_gps"
+        android:background="@drawable/white_circular_background"/>
     
     <!--
     <TextView

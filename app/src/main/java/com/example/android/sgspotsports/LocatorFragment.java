@@ -127,6 +127,7 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback,
             mMap.getUiSettings().setMapToolbarEnabled(true);
             mMap.getUiSettings().setAllGesturesEnabled(true);
             mMap.getUiSettings().setZoomControlsEnabled(false);
+            mMap.getUiSettings().setCompassEnabled(true);
 
             init();
         }

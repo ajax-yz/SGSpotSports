@@ -31,8 +31,9 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="10dp"
             android:src="@drawable/ic_magnify"/>
-        <EditText
-            android:inputType="text"
+
+        <AutoCompleteTextView
+            android:inputType="textAutoCorrect"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_toEndOf="@id/ic_magnify"

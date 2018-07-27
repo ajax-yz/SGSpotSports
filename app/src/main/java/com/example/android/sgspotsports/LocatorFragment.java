@@ -2,6 +2,7 @@ package com.example.android.sgspotsports;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -16,6 +17,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.InflateException;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +45,7 @@ import com.google.android.gms.location.places.PlaceBuffer;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -52,6 +55,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,6 +84,7 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback,
     private GoogleApiClient mGoogleApiClient;
     private PlaceInfo mPlace;
     private Marker mMarker;
+    private SupportMapFragment mapFragment;
 
     // widgets
     private AutoCompleteTextView mSearchText;
@@ -147,6 +152,72 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback,
          */
     }
 
+    // Initialize
+    private void init() {
+        Log.d(TAG, "init: initializing");
+
+        // Auto complete suggestions
+        mGoogleApiClient = new GoogleApiClient
+                .Builder(getContext())
+                .addApi(Places.GEO_DATA_API)
+                .addApi(Places.PLACE_DETECTION_API)
+                .enableAutoManage(getActivity(), this)
+                .build();
+
+        // Auto complete on click listener
+        mSearchText.setOnItemClickListener(mAutocompleteClickListener);
+
+        mPlaceAutocompleteAdapter = new PlaceAutocompleteAdapter(getContext(), mGoogleApiClient,
+                LAT_LNG_BOUNDS, null);
+
+        mSearchText.setAdapter(mPlaceAutocompleteAdapter);
+
+        mSearchText.setOnEditorActionListener(new TextView.OnEditorActionListener(){
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent keyEvent) {
+
+                if(actionId == EditorInfo.IME_ACTION_SEARCH
+                        || actionId == EditorInfo.IME_ACTION_DONE
+                        || keyEvent.getAction() == KeyEvent.ACTION_DOWN
+                        || keyEvent.getAction() == KeyEvent.KEYCODE_ENTER){
+                    // execute our method for searching
+                    geoLocate();
+                }
+
+                return false;
+            }
+        });
+
+        // Once the image view ic_gps is clicked, move to device location
+        mGps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: clicked gps icon");
+                getDeviceLocation();
+            }
+        });
+
+        mInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: clicked place info");
+                try{
+                    if(mMarker.isInfoWindowShown()){
+                        mMarker.hideInfoWindow();
+                    }else{
+                        Log.d(TAG, "onClick: place info: " + mPlace.toString());
+                        mMarker.showInfoWindow();
+                    }
+                }catch (NullPointerException e){
+                    Log.e(TAG, "onClick: NullPointerException: " + e.getMessage() );
+                }
+            }
+        });
+
+        hideSoftKeyboard();
+
+    }
+
     // Request for permission
     private void getLocationPermission() {
         Log.d(TAG, "getLocationPermission: getting location permissions");
@@ -169,6 +240,28 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback,
                     permissions,
                     LOCATION_PERMISSION_REQUEST_CODE);
         }
+    }
+
+    // Initialize map view
+    private void initMap() {
+
+        Log.d(TAG, "initMap: initializing map");
+        /* Previous code
+        SupportMapFragment mapFragment = (SupportMapFragment)
+                getChildFragmentManager().findFragmentById(R.id.LocatorMap);
+
+        mapFragment.getMapAsync(this);
+        */
+
+        // For debugging purpose
+        if (mapFragment == null) {
+            mapFragment = SupportMapFragment.newInstance();
+            mapFragment.getMapAsync(this);
+        }
+
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.replace(R.id.LocatorMap, mapFragment).commit();
+
     }
 
     // Retrieves device's location
@@ -242,82 +335,6 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback,
                     .title(title);
             mMap.addMarker(options);
         }
-
-        hideSoftKeyboard();
-
-    }
-
-    // Initialize map view
-    private void initMap() {
-
-        Log.d(TAG, "initMap: initializing map");
-        SupportMapFragment mapFragment = (SupportMapFragment)
-                getChildFragmentManager().findFragmentById(R.id.LocatorMap);
-
-        mapFragment.getMapAsync(this);
-    }
-
-    // Initialize
-    private void init() {
-        Log.d(TAG, "init: initializing");
-
-        // Auto complete suggetions
-        mGoogleApiClient = new GoogleApiClient
-                .Builder(getContext())
-                .addApi(Places.GEO_DATA_API)
-                .addApi(Places.PLACE_DETECTION_API)
-                .enableAutoManage(getActivity(), this)
-                .build();
-
-        // Auto complete on click listener
-        mSearchText.setOnItemClickListener(mAutocompleteClickListener);
-
-        mPlaceAutocompleteAdapter = new PlaceAutocompleteAdapter(getContext(), mGoogleApiClient,
-                LAT_LNG_BOUNDS, null);
-
-        mSearchText.setAdapter(mPlaceAutocompleteAdapter);
-
-        mSearchText.setOnEditorActionListener(new TextView.OnEditorActionListener(){
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent keyEvent) {
-
-                if(actionId == EditorInfo.IME_ACTION_SEARCH
-                        || actionId == EditorInfo.IME_ACTION_DONE
-                        || keyEvent.getAction() == KeyEvent.ACTION_DOWN
-                        || keyEvent.getAction() == KeyEvent.KEYCODE_ENTER){
-                    // execute our method for searching
-                    geoLocate();
-                }
-
-                return false;
-            }
-        });
-
-        // Once the image view ic_gps is clicked, move to device location
-        mGps.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "onClick: clicked gps icon");
-                getDeviceLocation();
-            }
-        });
-
-        mInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d(TAG, "onClick: clicked place info");
-                try{
-                    if(mMarker.isInfoWindowShown()){
-                        mMarker.hideInfoWindow();
-                    }else{
-                        Log.d(TAG, "onClick: place info: " + mPlace.toString());
-                        mMarker.showInfoWindow();
-                    }
-                }catch (NullPointerException e){
-                    Log.e(TAG, "onClick: NullPointerException: " + e.getMessage() );
-                }
-            }
-        });
 
         hideSoftKeyboard();
 
@@ -442,19 +459,20 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback,
     };
 
     /*
-    Method to resolve crash caused by click map twice
+    //Method to resolve crash caused by click map twice
     @Override
-    public void onDestroyView()
-    {
-        super.onDestroyView();
-        Fragment fragment = (Fragment) getFragmentManager().findFragmentById(R.id.nav_locator);
-        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-        ft.remove(fragment);
-        ft.commit();
+    public void onDestroyView() {
+            try {
+                Fragment fragment = (getFragmentManager().findFragmentById(R.id.LocatorMap));
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.remove(fragment);
+                ft.commit();
+            } catch (Exception e) {
+            }
+            super.onDestroyView();
     }
-
-    public void onPause()
-    {
+    @Override
+    public void onPause() {
         super.onPause();
         if(mMap!=null)
             mMap=null;
@@ -462,4 +480,12 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback,
 
     */
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (mapFragment != null) {
+            getFragmentManager().beginTransaction().remove(mapFragment).commit();
+        }
+
+    }
 }

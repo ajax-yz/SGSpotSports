@@ -3,7 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_orange_light">
+    android:background="@android:color/holo_orange_light"
+    android:id="@+id/LocatorMap">
+
+    <!-- Removed for debugging the crash when map is pressed twice
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -12,7 +15,9 @@
         android:id="@+id/LocatorMap"
         tools:context=".MapsActivity"
         android:name="com.google.android.gms.maps.SupportMapFragment" />
-    
+
+    -->
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"

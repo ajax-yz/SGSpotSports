@@ -13,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -99,6 +100,7 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback,
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
         super.onViewCreated(view, savedInstanceState);
 
         mSearchText = (AutoCompleteTextView) view.findViewById(R.id.input_search);
@@ -438,4 +440,26 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback,
             places.release();
         }
     };
+
+    /*
+    Method to resolve crash caused by click map twice
+    @Override
+    public void onDestroyView()
+    {
+        super.onDestroyView();
+        Fragment fragment = (Fragment) getFragmentManager().findFragmentById(R.id.nav_locator);
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.remove(fragment);
+        ft.commit();
+    }
+
+    public void onPause()
+    {
+        super.onPause();
+        if(mMap!=null)
+            mMap=null;
+    }
+
+    */
+
 }

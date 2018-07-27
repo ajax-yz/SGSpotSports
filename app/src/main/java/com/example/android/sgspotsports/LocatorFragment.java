@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -34,6 +35,8 @@ import android.widget.Toast;
 
 import com.example.android.sgspotsports.models.PlaceInfo;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
@@ -43,6 +46,7 @@ import com.google.android.gms.location.places.AutocompletePrediction;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.PlaceBuffer;
 import com.google.android.gms.location.places.Places;
+import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -59,6 +63,8 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.support.v4.provider.FontsContractCompat.FontRequestCallback.RESULT_OK;
+
 public class LocatorFragment extends Fragment implements OnMapReadyCallback,
     GoogleApiClient.OnConnectionFailedListener {
 
@@ -72,6 +78,7 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback,
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private static final float DEFAULT_ZOOM = 15f;
+    private static final int PLACE_PICKER_REQUEST = 1;
     private static final LatLngBounds LAT_LNG_BOUNDS = new LatLngBounds(
             new LatLng (1.218636, 103.574626), new LatLng(1.468211, 104.015617));
 
@@ -88,7 +95,7 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback,
 
     // widgets
     private AutoCompleteTextView mSearchText;
-    private ImageView mGps, mInfo;
+    private ImageView mGps, mInfo, mPlacePicker;
 
     //public LocatorFragment(Context mContext) {
         //this.mContext = mContext;
@@ -111,6 +118,7 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback,
         mSearchText = (AutoCompleteTextView) view.findViewById(R.id.input_search);
         mGps = (ImageView) view.findViewById(R.id.ic_gps);
         mInfo = (ImageView) view.findViewById(R.id.place_info);
+        mPlacePicker = (ImageView) view.findViewById(R.id.place_picker);
 
         getLocationPermission();
     }
@@ -214,8 +222,40 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback,
             }
         });
 
+        mPlacePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+
+                try {
+                    startActivityForResult(builder.build(getActivity()), PLACE_PICKER_REQUEST);
+                } catch (GooglePlayServicesRepairableException e) {
+                    Log.e(TAG, "onClick: GooglePlayServicesRepairableException: " + e.getMessage() );
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    Log.e(TAG, "onClick: GooglePlayServicesNotAvailableException: " + e.getMessage() );
+                }
+            }
+        });
+
         hideSoftKeyboard();
 
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PLACE_PICKER_REQUEST) {
+            getActivity();
+            if (resultCode == Activity.RESULT_OK) {
+                Place place = PlacePicker.getPlace(getContext(), data);
+
+                PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
+                        .getPlaceById(mGoogleApiClient, place.getId());
+                placeResult.setResultCallback(mUpdatePlaceDetailsCallback);
+            }
+        }
     }
 
     // Request for permission
@@ -255,7 +295,7 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback,
 
         // For debugging purpose
         if (mapFragment == null) {
-            mapFragment = SupportMapFragment.newInstance();
+            mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.LocatorMap);
             mapFragment.getMapAsync(this);
         }
 
@@ -299,6 +339,8 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback,
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
 
         mMap.clear();
+
+        mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(getContext()));
 
         if(placeInfo != null){
             try{

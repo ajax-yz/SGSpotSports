@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/holo_orange_light"
-    android:id="@+id/LocatorMap">
+    >
 
-    <!-- Removed for debugging the crash when map is pressed twice
+    <!-- Removed for debugging the crash when map is pressed twice -->
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -15,8 +15,6 @@
         android:id="@+id/LocatorMap"
         tools:context=".MapsActivity"
         android:name="com.google.android.gms.maps.SupportMapFragment" />
-
-    -->
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -80,6 +78,20 @@
         android:scaleType="centerCrop"
         android:id="@+id/place_info"
         android:src="@drawable/ic_info2"
+        android:background="@drawable/white_circular_background"/>
+
+    <ImageView
+        android:contentDescription="@string/select_nearby_place"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="220dp"
+        android:padding="17.5dp"
+        android:scaleType="centerCrop"
+        android:id="@+id/place_picker"
+        android:src="@drawable/ic_search_map"
         android:background="@drawable/white_circular_background"/>
     
     <!--

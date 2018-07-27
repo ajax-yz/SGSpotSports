@@ -18,7 +18,7 @@
             android:layout_gravity="center_horizontal"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textColor="#000"
+            android:textColor="@color/primary_text"
             android:textSize="14sp"
             android:textStyle="bold"/>
 
@@ -28,8 +28,9 @@
             android:ellipsize="end"
             android:maxLines="10"
             android:textSize="14sp"
-            android:textColor="#000"
+            android:textColor="@color/secondary_text"
             android:id="@+id/snippet"/>
+
     </LinearLayout>
 
 </LinearLayout>

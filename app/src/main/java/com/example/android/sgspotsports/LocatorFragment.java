@@ -510,17 +510,10 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback,
                 ft.remove(fragment);
                 ft.commit();
             } catch (Exception e) {
+                e.printStackTrace();
             }
             super.onDestroyView();
     }
-    @Override
-    public void onPause() {
-        super.onPause();
-        if(mMap!=null)
-            mMap=null;
-    }
-
-    */
 
     @Override
     public void onDestroyView() {
@@ -530,4 +523,26 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback,
         }
 
     }
+
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mGoogleApiClient.stopAutoManage(getActivity());
+        mGoogleApiClient.disconnect();
+    }
+
+    */
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.stopAutoManage(getActivity());
+            mGoogleApiClient.disconnect();
+        }
+    }
+
 }

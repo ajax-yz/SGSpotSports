@@ -64,12 +64,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.LocatorMap);
-        fragment.onActivityResult(requestCode,resultCode,data);
-    }
+    // OnActivityResult
 
     @Override
     // Code for navigation drawer

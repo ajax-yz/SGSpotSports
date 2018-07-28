@@ -64,7 +64,8 @@
         android:scaleType="centerCrop"
         android:id="@+id/ic_gps"
         android:src="@drawable/ic_gps"
-        android:background="@drawable/white_circular_background"/>
+        android:background="@drawable/white_circular_background"
+        android:elevation="7dp"/>
 
     <ImageView
         android:contentDescription="@string/get_place_info"
@@ -78,7 +79,8 @@
         android:scaleType="centerCrop"
         android:id="@+id/place_info"
         android:src="@drawable/ic_info2"
-        android:background="@drawable/white_circular_background"/>
+        android:background="@drawable/white_circular_background"
+        android:elevation="7dp"/>
 
     <ImageView
         android:contentDescription="@string/select_nearby_place"
@@ -92,7 +94,8 @@
         android:scaleType="centerCrop"
         android:id="@+id/place_picker"
         android:src="@drawable/ic_search_map"
-        android:background="@drawable/white_circular_background"/>
+        android:background="@drawable/white_circular_background"
+        android:elevation="7dp"/>
     
     <!--
     <TextView

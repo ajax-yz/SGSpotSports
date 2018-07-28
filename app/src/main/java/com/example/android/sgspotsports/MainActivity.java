@@ -103,6 +103,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         new FeedbackFragment()).commit();
 
                 break;
+
+            case R.id.nav_profile:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new ProfileFragment()).commit();
+                break;
         }
 
         drawer.closeDrawer(GravityCompat.START);
@@ -140,4 +145,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         return false;
     }
+
+
 }

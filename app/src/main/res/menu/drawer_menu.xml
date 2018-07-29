@@ -32,14 +32,14 @@
         <menu>
 
             <item
-                android:id="@+id/nav_feedback"
-                android:icon="@drawable/ic_feedback_black_24dp"
-                android:title="@string/feedback" />
-
-            <item
                 android:id="@+id/nav_profile"
                 android:icon="@drawable/ic_account"
                 android:title="@string/profile" />
+
+            <item
+                android:id="@+id/nav_feedback"
+                android:icon="@drawable/ic_feedback_black_24dp"
+                android:title="@string/feedback" />
 
 
         </menu>

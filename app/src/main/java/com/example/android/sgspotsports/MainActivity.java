@@ -1,6 +1,7 @@
 package com.example.android.sgspotsports;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -26,13 +27,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final String TAG = "MainActivity";
     private static final int ERROR_DIALOG_REQUEST = 9001;
 
+    // Passing context to fragments
+    public static Context contextOfApplication;
+    public static Context getContextOfApplication() {
+        return contextOfApplication;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         // Passing context
-        //LocatorFragment mLocatorFragment = new LocatorFragment(this);
+        contextOfApplication = getApplicationContext();
 
         // Start of code for navigation drawer
         Toolbar toolbar = findViewById(R.id.toolbar);

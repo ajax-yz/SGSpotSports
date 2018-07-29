@@ -25,6 +25,7 @@ public class FeedbackFragment extends Fragment {
     }
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
+
         mEditTextSubject = (EditText) view.findViewById(R.id.edit_text_subject);
         mEditTextMessage = (EditText) view.findViewById(R.id.edit_text_message);
 

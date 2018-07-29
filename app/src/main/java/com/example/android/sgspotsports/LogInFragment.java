@@ -1,6 +1,5 @@
 package com.example.android.sgspotsports;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -92,10 +91,10 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
                 progressBar.setVisibility(View.GONE);
                 if (task.isSuccessful()) {
                     //finish();
-                    ProfileFragment profileFragment = new ProfileFragment();
+                    AccountFragment accountFragment = new AccountFragment();
                     FragmentManager manager = getFragmentManager();
                     manager.beginTransaction().replace(R.id.fragment_container,
-                            new ProfileFragment()).commit();
+                            new AccountFragment()).commit();
                     // Add to back stack for fragment (back button) intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP);
                 } else {
                     Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -103,6 +102,21 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
             }
         });
     }
+
+    // Consider putting inside onCreateView method as it overrides the parent activity
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        if (mAuth.getCurrentUser() != null) {
+            //finish();
+            AccountFragment accountFragment = new AccountFragment();
+            FragmentManager manager = getFragmentManager();
+            manager.beginTransaction().replace(R.id.fragment_container,
+                    new AccountFragment()).commit();
+        }
+    }
+
 
     @Override
     public void onClick(View view) {

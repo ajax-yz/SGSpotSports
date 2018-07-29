@@ -44,6 +44,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
 
         editTextEmail = (EditText) view.findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) view.findViewById(R.id.editTextPassword);
+        progressBar = (ProgressBar) view.findViewById(R.id.progressbar);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -93,10 +94,10 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                 } else {
 
                     if (task.getException() instanceof FirebaseAuthUserCollisionException) {
-                        Toast.makeText(getActivity().getApplicationContext(), "You are already registered", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "You are already registered", Toast.LENGTH_SHORT).show();
 
                     } else {
-                        Toast.makeText(getActivity().getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
                 }

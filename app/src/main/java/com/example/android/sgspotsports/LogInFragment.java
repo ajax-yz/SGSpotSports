@@ -91,10 +91,11 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
                 progressBar.setVisibility(View.GONE);
                 if (task.isSuccessful()) {
                     //finish();
-                    AccountFragment accountFragment = new AccountFragment();
+                    // Changed to profile fragment for videoing
+                    //AccountFragment accountFragment = new AccountFragment();
                     FragmentManager manager = getFragmentManager();
                     manager.beginTransaction().replace(R.id.fragment_container,
-                            new AccountFragment()).commit();
+                            new ProfileFragment()).commit();
                     // Add to back stack for fragment (back button) intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP);
                 } else {
                     Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();

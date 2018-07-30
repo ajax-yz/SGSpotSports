@@ -41,9 +41,7 @@
                 android:icon="@drawable/ic_feedback_black_24dp"
                 android:title="@string/feedback" />
 
-
         </menu>
     </item>
-
 
 </menu>

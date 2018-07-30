@@ -3,8 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_orange_light"
-    >
+    android:background="@android:color/holo_orange_light">
 
     <!-- Removed for debugging the crash when map is pressed twice -->
 

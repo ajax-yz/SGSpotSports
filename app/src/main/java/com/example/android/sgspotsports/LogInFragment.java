@@ -110,10 +110,12 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
 
         if (mAuth.getCurrentUser() != null) {
             //finish();
-            AccountFragment accountFragment = new AccountFragment();
+
+            // Changed accountFragment to ProfileFragment, should rename account fragment to setup
+            //AccountFragment accountFragment = new AccountFragment();
             FragmentManager manager = getFragmentManager();
             manager.beginTransaction().replace(R.id.fragment_container,
-                    new AccountFragment()).commit();
+                    new ProfileFragment()).commit();
         }
     }
 

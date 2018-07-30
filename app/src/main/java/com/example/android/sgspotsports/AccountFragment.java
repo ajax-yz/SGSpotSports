@@ -77,15 +77,16 @@ public class AccountFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // Decoding
+        setHasOptionsMenu(true);
+
         mProgressDialog = new ProgressDialog(getContext());
 
         mAuth = FirebaseAuth.getInstance();
 
-        /*
+
         Toolbar toolbar = view.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        */
-
 
         editText = (EditText) view.findViewById(R.id.editTextDisplayName);
         imageView = (ImageView) view.findViewById(R.id.imageView);
@@ -189,6 +190,13 @@ public class AccountFragment extends Fragment {
                             if (task.isSuccessful()) {
                                 // progressBar.setVisibility(View.GONE);
                                 Toast.makeText(getActivity(), "Profile Updated", Toast.LENGTH_SHORT).show();
+
+                                //Temporary code to launch user profile page
+                                ProfileFragment profileFragment = new ProfileFragment();
+                                FragmentManager manager = getFragmentManager();
+                                manager.beginTransaction().replace(R.id.fragment_container,
+                                        new ProfileFragment()).commit();
+
                             }
                         }
                     });
@@ -243,33 +251,6 @@ public class AccountFragment extends Fragment {
                     });
         }
     }
-
-    /*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            case R.id.menuLogout:
-
-                FirebaseAuth.getInstance().signOut();
-                finish();
-                startActivity(new Intent(this, MainActivity.class));
-
-                break;
-        }
-
-        return true;
-    }
-    */
 
     private void showImageChooser() {
         Intent intent = new Intent();

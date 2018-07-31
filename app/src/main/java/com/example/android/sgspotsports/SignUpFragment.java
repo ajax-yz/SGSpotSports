@@ -94,7 +94,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                 if (task.isSuccessful()) {
                     //finish();
                     getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new AccountFragment()).commit();
+                            new SetupFragment()).commit();
                 } else {
 
                     if (task.getException() instanceof FirebaseAuthUserCollisionException) {

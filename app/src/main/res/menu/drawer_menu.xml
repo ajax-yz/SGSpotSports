@@ -20,10 +20,12 @@
             android:icon="@drawable/ic_action_friendship"
             android:title="@string/kaki" />
 
+        <!--
         <item
             android:id="@+id/nav_tracker"
             android:icon="@drawable/ic_action_tracker"
             android:title="@string/tracker" />
+            -->
 
     </group>
 

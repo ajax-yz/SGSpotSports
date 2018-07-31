@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         new KakiFragment()).commit();
                 break;
 
+            /*
             case R.id.nav_tracker:
 
                 TrackerFragment trackerFragment = new TrackerFragment();
@@ -101,6 +102,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 manager.beginTransaction().replace(R.id.fragment_container,
                         new TrackerFragment()).commit();
                 break;
+
+             */
 
             case R.id.nav_profile:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,

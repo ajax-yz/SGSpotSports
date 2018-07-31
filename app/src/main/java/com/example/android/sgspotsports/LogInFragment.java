@@ -25,7 +25,7 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
     private FirebaseAuth mAuth;
     private EditText editTextEmail, editTextPassword;
     private Button logIn;
-    private TextView signUp;
+    private TextView signUp, forgotPassword;
     private ProgressBar progressBar;
     private View view;
 
@@ -45,6 +45,8 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
         editTextEmail = (EditText) view.findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) view.findViewById(R.id.editTextPassword);
         progressBar = (ProgressBar) view.findViewById(R.id.progressbar);
+        forgotPassword = (TextView) view.findViewById(R.id.textViewForgotPassword);
+        forgotPassword.setOnClickListener(this);
 
         signUp = (TextView) view.findViewById(R.id.textViewSignup);
         signUp.setOnClickListener(this);
@@ -92,7 +94,7 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
                 if (task.isSuccessful()) {
                     //finish();
                     // Changed to profile fragment for videoing
-                    //AccountFragment accountFragment = new AccountFragment();
+                    //SetupSetupFragment setupFragment = new SetupSetupFragment();
                     FragmentManager manager = getFragmentManager();
                     manager.beginTransaction().replace(R.id.fragment_container,
                             new ProfileFragment()).commit();
@@ -113,13 +115,12 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
             //finish();
 
             // Changed accountFragment to ProfileFragment, should rename account fragment to setup
-            //AccountFragment accountFragment = new AccountFragment();
+            //SetupSetupFragment accountFragment = new SetupSetupFragment();
             FragmentManager manager = getFragmentManager();
             manager.beginTransaction().replace(R.id.fragment_container,
                     new ProfileFragment()).commit();
         }
     }
-
 
     @Override
     public void onClick(View view) {
@@ -134,6 +135,11 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
 
             case R.id.buttonLogin:
                 userLogin();
+                break;
+
+            case R.id.textViewForgotPassword:
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new ForgotPasswordFragment()).commit();
                 break;
         }
     }

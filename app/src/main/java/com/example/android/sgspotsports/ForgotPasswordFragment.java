@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,7 +66,9 @@ public class ForgotPasswordFragment extends Fragment {
                                 mProgressDialog.dismiss();
                                 if (task.isSuccessful()) {
                                     Toast.makeText(getContext(), "Please check email to reset your password", Toast.LENGTH_SHORT).show();
-                                    // Open up the log in fragment afterwards
+                                    FragmentManager manager = getFragmentManager();
+                                    manager.beginTransaction().replace(R.id.fragment_container,
+                                            new LogInFragment()).commit();
                                 } else {
                                     Toast.makeText(getContext(), "Fail to send email to reset password", Toast.LENGTH_SHORT).show();
                                 }

@@ -65,6 +65,7 @@ public class ForgotPasswordFragment extends Fragment {
                                 mProgressDialog.dismiss();
                                 if (task.isSuccessful()) {
                                     Toast.makeText(getContext(), "Please check email to reset your password", Toast.LENGTH_SHORT).show();
+                                    // Open up the log in fragment afterwards
                                 } else {
                                     Toast.makeText(getContext(), "Fail to send email to reset password", Toast.LENGTH_SHORT).show();
                                 }

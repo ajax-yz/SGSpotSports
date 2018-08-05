@@ -78,19 +78,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // Code for navigation drawer
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
+        // Clear all the back stack
+        getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
         switch(item.getItemId()) {
             case R.id.nav_locator:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                getSupportFragmentManager().beginTransaction()
+                        .add(new LocatorFragment(), "LocatorFragment")
+                        .addToBackStack("LocatorFragment")
+                        .replace(R.id.fragment_container,
                         new LocatorFragment()).commit();
                 break;
 
             case R.id.nav_planner:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                getSupportFragmentManager().beginTransaction()
+                        .add(new LocatorFragment(), "LocatorFragment")
+                        .addToBackStack("LocatorFragment")
+                        .replace(R.id.fragment_container,
                         new PlannerFragment()).commit();
                 break;
 
             case R.id.nav_kaki:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                getSupportFragmentManager().beginTransaction()
+                        .add(new LocatorFragment(), "LocatorFragment")
+                        .addToBackStack("LocatorFragment")
+                        .replace(R.id.fragment_container,
                         new KakiFragment()).commit();
                 break;
 
@@ -106,7 +118,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
              */
 
             case R.id.nav_profile:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                getSupportFragmentManager().beginTransaction()
+                        .add(new LocatorFragment(), "LocatorFragment")
+                        .addToBackStack("LocatorFragment")
+                        .replace(R.id.fragment_container,
                         new LogInFragment()).commit();
                 break;
 
@@ -115,7 +130,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this,"Opening Feedback Page", Toast.LENGTH_SHORT).show();
                 // OPEN FEEDBACK PAGE
 
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                getSupportFragmentManager().beginTransaction()
+                        .add(new LocatorFragment(), "LocatorFragment")
+                        .addToBackStack("LocatorFragment")
+                        .replace(R.id.fragment_container,
                         new FeedbackFragment()).commit();
 
                 break;

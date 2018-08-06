@@ -129,7 +129,9 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
                 //finish();
                 SignUpFragment signUpFragment = new SignUpFragment();
                 FragmentManager manager = getFragmentManager();
-                manager.beginTransaction().replace(R.id.fragment_container,
+                manager.beginTransaction()
+                        .addToBackStack(null)
+                        .replace(R.id.fragment_container,
                         new SignUpFragment()).commit();
                 break;
 
@@ -138,7 +140,9 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.textViewForgotPassword:
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                getFragmentManager().beginTransaction()
+                        .addToBackStack(null)
+                        .replace(R.id.fragment_container,
                         new ForgotPasswordFragment()).commit();
                 break;
         }

@@ -67,7 +67,9 @@ public class ForgotPasswordFragment extends Fragment {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(getContext(), "Please check email to reset your password", Toast.LENGTH_SHORT).show();
                                     FragmentManager manager = getFragmentManager();
-                                    manager.beginTransaction().replace(R.id.fragment_container,
+                                    manager.beginTransaction()
+                                            .addToBackStack(null)
+                                            .replace(R.id.fragment_container,
                                             new LogInFragment()).commit();
                                 } else {
                                     Toast.makeText(getContext(), "Fail to send email to reset password", Toast.LENGTH_SHORT).show();

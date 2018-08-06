@@ -121,7 +121,9 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                 //finish();
                 LogInFragment logInFragment = new LogInFragment();
                 FragmentManager manager = getFragmentManager();
-                manager.beginTransaction().replace(R.id.fragment_container,
+                manager.beginTransaction()
+                        .addToBackStack(null)
+                        .replace(R.id.fragment_container,
                         new LogInFragment()).commit();
                 break;
         }

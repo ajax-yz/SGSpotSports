@@ -79,29 +79,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         // Clear all the back stack
-        getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        //getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
         switch(item.getItemId()) {
             case R.id.nav_locator:
                 getSupportFragmentManager().beginTransaction()
-                        .add(new LocatorFragment(), "LocatorFragment")
-                        .addToBackStack("LocatorFragment")
+                        .addToBackStack(null)
                         .replace(R.id.fragment_container,
                         new LocatorFragment()).commit();
                 break;
 
             case R.id.nav_planner:
                 getSupportFragmentManager().beginTransaction()
-                        .add(new LocatorFragment(), "LocatorFragment")
-                        .addToBackStack("LocatorFragment")
+                        .addToBackStack(null)
                         .replace(R.id.fragment_container,
                         new PlannerFragment()).commit();
                 break;
 
             case R.id.nav_kaki:
                 getSupportFragmentManager().beginTransaction()
-                        .add(new LocatorFragment(), "LocatorFragment")
-                        .addToBackStack("LocatorFragment")
+                        .addToBackStack(null)
                         .replace(R.id.fragment_container,
                         new KakiFragment()).commit();
                 break;
@@ -111,7 +108,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 TrackerFragment trackerFragment = new TrackerFragment();
                 FragmentManager manager = getSupportFragmentManager();
-                manager.beginTransaction().replace(R.id.fragment_container,
+                manager.beginTransaction()
+                .add(new LocatorFragment(), "LocatorFragment")
+                        .addToBackStack("LocatorFragment")
+                .replace(R.id.fragment_container,
                         new TrackerFragment()).commit();
                 break;
 
@@ -119,8 +119,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.nav_profile:
                 getSupportFragmentManager().beginTransaction()
-                        .add(new LocatorFragment(), "LocatorFragment")
-                        .addToBackStack("LocatorFragment")
+                        .addToBackStack(null)
                         .replace(R.id.fragment_container,
                         new LogInFragment()).commit();
                 break;
@@ -131,8 +130,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 // OPEN FEEDBACK PAGE
 
                 getSupportFragmentManager().beginTransaction()
-                        .add(new LocatorFragment(), "LocatorFragment")
-                        .addToBackStack("LocatorFragment")
+                        .addToBackStack(null)
                         .replace(R.id.fragment_container,
                         new FeedbackFragment()).commit();
 

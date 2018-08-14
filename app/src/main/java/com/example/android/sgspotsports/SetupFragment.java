@@ -45,7 +45,7 @@ public class SetupFragment extends Fragment {
     private View view;
     private TextView textView;
     private ImageView imageView;
-    private EditText editText;
+    private EditText mDisplayName;
 
     private Uri uriProfileImage;
     private ProgressBar progressBar;
@@ -78,7 +78,7 @@ public class SetupFragment extends Fragment {
         Toolbar toolbar = view.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
-        editText = (EditText) view.findViewById(R.id.editTextDisplayName);
+        mDisplayName = (EditText) view.findViewById(R.id.editTextDisplayName);
         imageView = (ImageView) view.findViewById(R.id.imageView);
         progressBar = (ProgressBar) view.findViewById(R.id.progressbar);
         textView = (TextView) view.findViewById(R.id.textViewVerified);
@@ -124,7 +124,7 @@ public class SetupFragment extends Fragment {
             }
 
             if (user.getDisplayName() != null) {
-                editText.setText(user.getDisplayName());
+                mDisplayName.setText(user.getDisplayName());
             }
 
             if (user.isEmailVerified()) {
@@ -156,11 +156,11 @@ public class SetupFragment extends Fragment {
     private void saveUserInformation() {
 
 
-        String displayName = editText.getText().toString();
+        String name = mDisplayName.getText().toString();
 
-        if (displayName.isEmpty()) {
-            editText.setError("Name required");
-            editText.requestFocus();
+        if (name.isEmpty()) {
+            mDisplayName.setError("Name required");
+            mDisplayName.requestFocus();
             return;
         }
 
@@ -169,7 +169,7 @@ public class SetupFragment extends Fragment {
         if (user != null && profileImageUrl != null) {
             // progressBar.setVisibility(View.VISIBLE);
             UserProfileChangeRequest profile = new UserProfileChangeRequest.Builder()
-                    .setDisplayName(displayName)
+                    .setDisplayName(name)
                     .setPhotoUri(Uri.parse(profileImageUrl))
                     .build();
 

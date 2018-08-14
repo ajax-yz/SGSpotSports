@@ -1,5 +1,6 @@
 package com.example.android.sgspotsports;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -24,7 +25,11 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 public class SignUpFragment extends Fragment implements View.OnClickListener {
 
     private EditText editTextEmail, editTextPassword;
-    private ProgressBar progressBar;
+    //private ProgressBar progressBar;
+
+    //
+    private ProgressDialog mRegProgress;
+
     private FirebaseAuth mAuth;
     private Button signUp;
     private View view;
@@ -45,7 +50,9 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
 
         editTextEmail = (EditText) view.findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) view.findViewById(R.id.editTextPassword);
-        progressBar = (ProgressBar) view.findViewById(R.id.progressbar);
+        //progressBar = (ProgressBar) view.findViewById(R.id.progressbar);
+
+        mRegProgress = new ProgressDialog(getActivity());
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -54,6 +61,10 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
 
         logIn = (TextView) view.findViewById(R.id.textViewLogin);
         logIn.setOnClickListener(this);
+
+        // Set title of toolbar (doesn't work)
+        // getSupportActionBar().setTitle("Sign Up A New Account");
+        // getSupportActionBar().setDisplayHomeAsUpEnabled(true); // Creates a back button at top left
 
     }
 
@@ -85,18 +96,25 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
             return;
         }
 
-        progressBar.setVisibility(View.VISIBLE);
+        // progressBar.setVisibility(View.VISIBLE);
+
+        mRegProgress.setTitle("Registering User");
+        mRegProgress.setMessage("Please wait while we create your account");
+        mRegProgress.setCanceledOnTouchOutside(false);
+        mRegProgress.show();
 
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                progressBar.setVisibility(View.GONE);
+                //progressBar.setVisibility(View.GONE);
+
                 if (task.isSuccessful()) {
+                    mRegProgress.dismiss();
                     //finish();
                     getFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             new SetupFragment()).commit();
                 } else {
-
+                    mRegProgress.hide();
                     if (task.getException() instanceof FirebaseAuthUserCollisionException) {
                         Toast.makeText(getActivity(), "You are already registered", Toast.LENGTH_SHORT).show();
 

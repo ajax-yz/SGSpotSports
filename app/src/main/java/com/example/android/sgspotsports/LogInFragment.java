@@ -1,5 +1,6 @@
 package com.example.android.sgspotsports;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -26,7 +27,8 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
     private EditText editTextEmail, editTextPassword;
     private Button logIn;
     private TextView signUp, forgotPassword;
-    private ProgressBar progressBar;
+    //private ProgressBar progressBar;
+    private ProgressDialog mLoginProgress;
     private View view;
 
     @Nullable
@@ -44,7 +46,10 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
 
         editTextEmail = (EditText) view.findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) view.findViewById(R.id.editTextPassword);
-        progressBar = (ProgressBar) view.findViewById(R.id.progressbar);
+
+        //progressBar = (ProgressBar) view.findViewById(R.id.progressbar);
+        mLoginProgress = new ProgressDialog(getActivity());
+
         forgotPassword = (TextView) view.findViewById(R.id.textViewForgotPassword);
         forgotPassword.setOnClickListener(this);
 
@@ -80,18 +85,24 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
         }
 
         if (password.length() < 6) {
-            editTextPassword.setError("Minimum lenght of password should be 6");
+            editTextPassword.setError("Minimum length of password should be 6");
             editTextPassword.requestFocus();
             return;
         }
 
-        progressBar.setVisibility(View.VISIBLE);
+        mLoginProgress.setTitle("Logging In");
+        mLoginProgress.setMessage("Please wait while we check your credentials.");
+        mLoginProgress.setCanceledOnTouchOutside(false);
+        mLoginProgress.show();
+        // progressBar.setVisibility(View.VISIBLE);
 
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                progressBar.setVisibility(View.GONE);
+                //progressBar.setVisibility(View.GONE);
                 if (task.isSuccessful()) {
+
+                    mLoginProgress.dismiss();
                     //finish();
                     // Changed to profile fragment for videoing
                     //SetupSetupFragment setupFragment = new SetupSetupFragment();
@@ -100,6 +111,7 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
                             new ProfileFragment()).commit();
                     // Add to back stack for fragment (back button) intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP);
                 } else {
+                    mLoginProgress.hide();
                     Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -115,7 +127,7 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
             //finish();
 
             // Changed accountFragment to ProfileFragment, should rename account fragment to setup
-            //SetupSetupFragment accountFragment = new SetupSetupFragment();
+            //SetupFragment accountFragment = new SetupSetupFragment();
             FragmentManager manager = getFragmentManager();
             manager.beginTransaction().replace(R.id.fragment_container,
                     new ProfileFragment()).commit();

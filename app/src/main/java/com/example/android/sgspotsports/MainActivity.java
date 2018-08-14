@@ -20,12 +20,15 @@ import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     // Variable for navigation drawer
     private DrawerLayout drawer;
     private FirebaseAuth mAuth;
+
+    private Toolbar mToolbar;
 
     // Code for handling error to launch maps
     private static final String TAG = "MainActivity";
@@ -48,15 +51,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         contextOfApplication = getApplicationContext();
 
         // Start of code for navigation drawer
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        mToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+
+        // Set title of toolbar (doesn't work)
+        // getSupportActionBar().setTitle("Sports Facility Locator");
 
         drawer = findViewById(R.id.drawer_layout);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, mToolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
@@ -190,6 +196,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.menuLogout:
 
                 FirebaseAuth.getInstance().signOut();
+
+                Toast.makeText(this, "You have been successfully logged out", Toast.LENGTH_SHORT).show();
+
                 //finish();
                 FragmentManager manager = getSupportFragmentManager();
                 manager.beginTransaction().replace(R.id.fragment_container,
@@ -201,5 +210,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    /* Consider to check if the user is currently logged in
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if (currentUser == null) {
+        FragmentManager manager = getSupportFragmentManager();
+                manager.beginTransaction().replace(R.id.fragment_container,
+                        new LogInFragment()).commit();
+                        finish();
+        }
+
+        updateUI(currentUser);
+    }
+    */
 
 }

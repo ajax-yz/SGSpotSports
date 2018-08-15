@@ -36,11 +36,22 @@
             android:paddingRight="15dp">
 
             <EditText
+                android:id="@+id/editTextDisplayName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:hint="Display Name"
+                android:inputType="textPersonName"
+                android:paddingBottom="15dp"
+                android:textColor="@color/icons"
+                android:textColorHint="@color/icons" />
+
+            <EditText
                 android:id="@+id/editTextEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
-                android:hint="email"
+                android:hint="Email"
                 android:inputType="textEmailAddress"
                 android:paddingBottom="15dp"
                 android:textColor="@color/icons"
@@ -51,7 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
-                android:hint="password"
+                android:hint="Password"
                 android:inputType="textPassword"
                 android:paddingBottom="15dp"
                 android:textColor="@color/icons"

@@ -2,11 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@android:color/holo_green_light">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/list_of_tabs">
 
         <!--
         <include layout="@layout/toolbar"
@@ -16,7 +18,18 @@
         <android.support.design.widget.TabLayout
             android:id="@+id/chat_tabs"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:tabIndicatorColor="@color/accent"
+            app:tabSelectedTextColor="@color/icons"
+            app:tabTextColor="@color/icons">
+
+            <!-- Can also include these:
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/white"
+            app:tabIndicatorHeight="4dp"
+            app:tabBackground="@color/colorPrimary"
+            app:tabMode="fixed"
+            -->
 
         </android.support.design.widget.TabLayout>
 
@@ -24,8 +37,9 @@
 
     <android.support.v4.view.ViewPager
         android:id="@+id/tab_pager"
+        android:layout_below="@+id/list_of_tabs"
         android:layout_width="match_parent"
-        android:layout_height="464dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true">
 

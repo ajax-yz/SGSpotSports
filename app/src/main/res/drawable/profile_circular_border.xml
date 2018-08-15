@@ -2,13 +2,15 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
     <corners android:radius="100dp" />
-    <solid android:color="@color/accent" />
+    <solid android:color="@color/icons" />
     <stroke
         android:width="3dip"
-        android:color="#f9f9f9" />
+        android:color="@color/accent" />
     <padding
         android:bottom="4dp"
         android:left="4dp"
         android:right="4dp"
         android:top="4dp" />
 </shape>
+
+<!-- Flip the colours to revert back to original -->

@@ -21,15 +21,21 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class SignUpFragment extends Fragment implements View.OnClickListener {
 
-    private EditText editTextEmail, editTextPassword;
+    private EditText editTextEmail, editTextPassword, editTextDisplayName;
     //private ProgressBar progressBar;
 
     //
     private ProgressDialog mRegProgress;
 
+    private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     private Button signUp;
     private View view;
@@ -50,6 +56,8 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
 
         editTextEmail = (EditText) view.findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) view.findViewById(R.id.editTextPassword);
+        editTextDisplayName = (EditText) view.findViewById(R.id.editTextDisplayName);
+
         //progressBar = (ProgressBar) view.findViewById(R.id.progressbar);
 
         mRegProgress = new ProgressDialog(getActivity());
@@ -71,10 +79,17 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
     private void registerUser() {
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
+        final String display_name = editTextDisplayName.getText().toString();
 
         if (email.isEmpty()) {
             editTextEmail.setError("Email is required");
             editTextEmail.requestFocus();
+            return;
+        }
+
+        if (display_name.isEmpty()) {
+            editTextDisplayName.setError("Display name is required");
+            editTextDisplayName.requestFocus();
             return;
         }
 
@@ -109,10 +124,34 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                 //progressBar.setVisibility(View.GONE);
 
                 if (task.isSuccessful()) {
-                    mRegProgress.dismiss();
-                    //finish();
-                    getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new SetupFragment()).commit();
+
+                    FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
+                    String uid = current_user.getUid();
+
+                    // Root & child directory
+                    mDatabase = FirebaseDatabase.getInstance().getReference()
+                            .child("Users").child(uid);
+
+                    HashMap<String, String> userMap = new HashMap<>();
+                    userMap.put("name", display_name);
+                    userMap.put("status", "You may update your status here");
+                    userMap.put("image", "default");
+                    userMap.put("thumb_image", "default");
+
+                    mDatabase.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+
+                                mRegProgress.dismiss();
+                                //finish();
+                                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                        new SetupFragment()).commit();
+
+                            }
+                        }
+                    });
+
                 } else {
                     mRegProgress.hide();
                     if (task.getException() instanceof FirebaseAuthUserCollisionException) {

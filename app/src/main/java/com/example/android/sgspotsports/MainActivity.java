@@ -2,6 +2,7 @@ package com.example.android.sgspotsports;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -192,7 +193,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
+        FragmentManager manager = getSupportFragmentManager();
+
         switch (item.getItemId()) {
+
             case R.id.menuLogout:
 
                 FirebaseAuth.getInstance().signOut();
@@ -200,12 +204,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this, "You have been successfully logged out", Toast.LENGTH_SHORT).show();
 
                 //finish();
-                FragmentManager manager = getSupportFragmentManager();
                 manager.beginTransaction().replace(R.id.fragment_container,
                         new LogInFragment()).commit();
 
                 break;
+
+            case R.id.main_setting:
+
+                if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+                    manager.beginTransaction().replace(R.id.fragment_container,
+                            new SettingsFragment()).commit();
+                } else {
+                    Toast.makeText(this,"Please login first to access the account settings", Toast.LENGTH_SHORT).show();
+                }
         }
+
+
 
         return true;
     }

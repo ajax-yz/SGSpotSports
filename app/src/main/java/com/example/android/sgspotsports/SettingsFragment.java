@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +34,9 @@ public class SettingsFragment extends Fragment {
     private TextView mName;
     private TextView mStatus;
 
+    private Button mStatusBtn;
+    private Button mImageBtn;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -47,6 +52,9 @@ public class SettingsFragment extends Fragment {
         mDisplayImage = (CircleImageView) view.findViewById(R.id.settings_profile_photo);
         mName = (TextView) view.findViewById(R.id.settings_profile_name);
         mStatus = (TextView) view.findViewById(R.id.settings_profile_status);
+
+        mStatusBtn = (Button) view.findViewById(R.id.button_change_status);
+        mImageBtn = (Button) view.findViewById(R.id.button_change_image);
 
         // Retrieving user uid
 
@@ -71,5 +79,22 @@ public class SettingsFragment extends Fragment {
 
             }
         });
+
+        mStatusBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                /* using intent to display the status
+                String status_value = mStatus.getText().toString();
+                status_intent.putExtra("status_value", status_value);
+                */
+
+                FragmentManager manager = getFragmentManager();
+                manager.beginTransaction().replace(R.id.fragment_container,
+                        new StatusFragment()).commit();
+
+            }
+        });
+
     }
 }

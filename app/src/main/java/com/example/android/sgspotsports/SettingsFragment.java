@@ -1,5 +1,6 @@
 package com.example.android.sgspotsports;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,6 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -55,6 +58,8 @@ public class SettingsFragment extends Fragment {
 
     // Storage Firebase
     private StorageReference mImageStorage;
+
+    private ProgressDialog mProgressDialog;
 
     @Nullable
     @Override
@@ -93,6 +98,8 @@ public class SettingsFragment extends Fragment {
 
                 mName.setText(name);
                 mStatus.setText(status);
+                Picasso.get().load(image).into(mDisplayImage);
+
             }
 
             @Override
@@ -149,23 +156,44 @@ public class SettingsFragment extends Fragment {
 
             Uri imageUri = data.getData();
 
+            // Testing
+            Toast.makeText(getActivity(), "Cropping started", Toast.LENGTH_LONG).show();
+
             CropImage.activity(imageUri)
                     .setAspectRatio(1,1)
                     .start(getActivity());
 
-            //Toast.makeText(getActivity(), (CharSequence) imageUri, Toast.LENGTH_LONG).show();
-
         }
+
+        Toast.makeText(getActivity(), "Cropping...1", Toast.LENGTH_LONG).show();
 
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
 
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
 
+            // Testing
+            Toast.makeText(getActivity(), "Cropping...2", Toast.LENGTH_LONG).show();
+
             if (resultCode == RESULT_OK) {
+
+                // Testing
+                Toast.makeText(getActivity(), "Cropping...3", Toast.LENGTH_LONG).show();
+
+                mProgressDialog = new ProgressDialog(getActivity());
+                mProgressDialog.setTitle("Uploading Image...");
+                mProgressDialog.setMessage("Please wait while we upload and process the image");
+                mProgressDialog.setCanceledOnTouchOutside(false);
+                mProgressDialog.show();
 
                 Uri resultUri = result.getUri();
 
-                StorageReference filepath = mImageStorage.child("profile_images").child(random() + ".jpg");
+                final String current_user_id = mCurrentUser.getUid();
+
+                // Testing
+                Toast.makeText(getActivity(), current_user_id, Toast.LENGTH_LONG).show();
+
+                StorageReference filepath = mImageStorage.child("profile_images").child(current_user_id + ".jpg");
+
 
                 filepath.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -173,11 +201,39 @@ public class SettingsFragment extends Fragment {
 
                         if (task.isSuccessful()) {
 
+
                             Toast.makeText(getActivity(), "Working", Toast.LENGTH_LONG).show();
+                            mProgressDialog.dismiss();
+
+                            /*
+
+                            // Test and check the .child("image.jpg")
+                            mImageStorage.child("profile_images").child(current_user_id + ".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+
+                                    String downloadUrl = uri.toString();
+
+                                    mUserDatabase.child("image").setValue(downloadUrl).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+
+                                            if (task.isSuccessful()) {
+                                                mProgressDialog.dismiss();
+                                                Toast.makeText(getActivity(), "Successfully uploaded", Toast.LENGTH_LONG).show();
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+                            //Toast.makeText(getActivity(), "Working", Toast.LENGTH_LONG).show();
+
+                            */
 
                         } else {
 
                             Toast.makeText(getActivity(), "Error in uploading", Toast.LENGTH_LONG).show();
+                            mProgressDialog.dismiss();
 
                         }
                     }
@@ -186,10 +242,17 @@ public class SettingsFragment extends Fragment {
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
 
                 Exception error = result.getError();
+                Toast.makeText(getActivity(), "Error in uploading", Toast.LENGTH_LONG).show();
+
             }
         }
 
+        // Testing
+        Toast.makeText(getActivity(), "Cropping...4", Toast.LENGTH_LONG).show();
+
     }
+
+
 
     public static String random() {
         Random generator = new Random();

@@ -1,5 +1,6 @@
 package com.example.android.sgspotsports;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -53,7 +54,7 @@ public class SettingsFragment extends Fragment {
     private Button mStatusBtn;
     private Button mImageBtn;
 
-    private static final int GALLERY_PICK = 1;
+    private static final int GALLERY_PICK = 101;
     private static final int MAX_LENGTH = 10;
 
     // Storage Firebase
@@ -83,7 +84,7 @@ public class SettingsFragment extends Fragment {
         // Retrieving user uid
 
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
-        String current_uid = mCurrentUser.getUid();
+        final String current_uid = mCurrentUser.getUid();
         mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(current_uid);
 
         mImageStorage = FirebaseStorage.getInstance().getReference();
@@ -128,19 +129,18 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-
                 Intent galleyIntent = new Intent();
                 galleyIntent.setType("image/*");
                 galleyIntent.setAction(Intent.ACTION_GET_CONTENT);
 
-                startActivityForResult(Intent.createChooser(galleyIntent, "SELECT_IMAGE"), GALLERY_PICK);
-
+                startActivityForResult(Intent.createChooser(galleyIntent, "SELECT IMAGE"), GALLERY_PICK);
 
                 /* start picker to get image for cropping and then use the image in cropping activity
                 CropImage.activity()
                         .setGuidelines(CropImageView.Guidelines.ON)
+                        .setAspectRatio(1, 1)
                         .start(getActivity());
-                */
+                        */
 
             }
         });
@@ -151,33 +151,25 @@ public class SettingsFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-
-        if (requestCode == GALLERY_PICK && resultCode == RESULT_OK) {
+        if (requestCode == GALLERY_PICK && resultCode == Activity.RESULT_OK) {
 
             Uri imageUri = data.getData();
 
-            // Testing
-            Toast.makeText(getActivity(), "Cropping started", Toast.LENGTH_LONG).show();
-
+            // start cropping activity for pre-acquired image saved on the device
             CropImage.activity(imageUri)
                     .setAspectRatio(1,1)
-                    .start(getActivity());
+                    .start(getContext(), this);
+
+
+            //Toast.makeText(getActivity(), imageUri, Toast.LENGTH_LONG).show();
+
+
 
         }
 
-        Toast.makeText(getActivity(), "Cropping...1", Toast.LENGTH_LONG).show();
-
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
-
-            // Testing
-            Toast.makeText(getActivity(), "Cropping...2", Toast.LENGTH_LONG).show();
-
             if (resultCode == RESULT_OK) {
-
-                // Testing
-                Toast.makeText(getActivity(), "Cropping...3", Toast.LENGTH_LONG).show();
 
                 mProgressDialog = new ProgressDialog(getActivity());
                 mProgressDialog.setTitle("Uploading Image...");
@@ -189,11 +181,7 @@ public class SettingsFragment extends Fragment {
 
                 final String current_user_id = mCurrentUser.getUid();
 
-                // Testing
-                Toast.makeText(getActivity(), current_user_id, Toast.LENGTH_LONG).show();
-
                 StorageReference filepath = mImageStorage.child("profile_images").child(current_user_id + ".jpg");
-
 
                 filepath.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -201,11 +189,7 @@ public class SettingsFragment extends Fragment {
 
                         if (task.isSuccessful()) {
 
-
-                            Toast.makeText(getActivity(), "Working", Toast.LENGTH_LONG).show();
                             mProgressDialog.dismiss();
-
-                            /*
 
                             // Test and check the .child("image.jpg")
                             mImageStorage.child("profile_images").child(current_user_id + ".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -226,9 +210,8 @@ public class SettingsFragment extends Fragment {
                                     });
                                 }
                             });
-                            //Toast.makeText(getActivity(), "Working", Toast.LENGTH_LONG).show();
 
-                            */
+                            Toast.makeText(getActivity(), "working", Toast.LENGTH_LONG).show();
 
                         } else {
 
@@ -247,22 +230,5 @@ public class SettingsFragment extends Fragment {
             }
         }
 
-        // Testing
-        Toast.makeText(getActivity(), "Cropping...4", Toast.LENGTH_LONG).show();
-
-    }
-
-
-
-    public static String random() {
-        Random generator = new Random();
-        StringBuilder randomStringBuilder = new StringBuilder();
-        int randomLength = generator.nextInt(MAX_LENGTH);
-        char tempChar;
-        for (int i = 0; i < randomLength; i++){
-            tempChar = (char) (generator.nextInt(96) + 32);
-            randomStringBuilder.append(tempChar);
-        }
-        return randomStringBuilder.toString();
     }
 }

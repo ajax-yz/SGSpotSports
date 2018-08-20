@@ -18,8 +18,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/settings_profile_photo"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_below="@+id/header_cover_image"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="-75dp"
@@ -43,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="70dp"
+                android:layout_marginTop="80dp"
                 android:text="Bryan"
                 android:textColor="#fff"
                 android:textSize="24sp"

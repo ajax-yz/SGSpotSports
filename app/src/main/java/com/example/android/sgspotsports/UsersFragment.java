@@ -80,7 +80,8 @@ public class UsersFragment extends Fragment {
             @Override
             protected void onBindViewHolder(@NonNull UsersViewHolder usersViewHolder, int position, @NonNull Users users) {
 
-                usersViewHolder.setName(users.getName());
+                usersViewHolder.setDisplayName(users.getName());
+                usersViewHolder.setUserStatus(users.getStatus());
 
             }
 
@@ -121,7 +122,14 @@ public class UsersFragment extends Fragment {
 
         }
 
-        public void setName(String name){
+        public void setUserStatus(String status) {
+
+            TextView userStatusView = (TextView) mView.findViewById(R.id.user_single_status);
+            userStatusView.setText(status);
+
+        }
+
+        public void setDisplayName(String name){
 
             TextView userNameView = (TextView) mView.findViewById(R.id.user_single_name);
             userNameView.setText(name);

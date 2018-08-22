@@ -218,10 +218,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     Toast.makeText(this,"Please login first to access the account settings", Toast.LENGTH_SHORT).show();
                 }
 
+                break;
+
             case R.id.main_all_btn:
 
                 manager.beginTransaction().replace(R.id.fragment_container,
                         new UsersFragment()).commit();
+
+                break;
         }
 
 

@@ -1,5 +1,6 @@
 package com.example.android.sgspotsports;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,6 +16,9 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UsersFragment extends Fragment {
 
@@ -82,6 +86,7 @@ public class UsersFragment extends Fragment {
 
                 usersViewHolder.setDisplayName(users.getName());
                 usersViewHolder.setUserStatus(users.getStatus());
+                usersViewHolder.setUserImage(users.getThumb_image());
 
             }
 
@@ -134,6 +139,13 @@ public class UsersFragment extends Fragment {
             TextView userNameView = (TextView) mView.findViewById(R.id.user_single_name);
             userNameView.setText(name);
 
+        }
+
+        public void setUserImage(String thumb_image) {
+
+            CircleImageView userImageView = (CircleImageView) mView.findViewById(R.id.user_single_image);
+
+            Picasso.get().load(thumb_image).placeholder(R.drawable.ic_avatar).into(userImageView);
         }
 
     }

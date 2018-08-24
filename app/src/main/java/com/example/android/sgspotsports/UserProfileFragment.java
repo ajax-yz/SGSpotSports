@@ -8,14 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class PlannerFragment extends Fragment {
+public class UserProfileFragment extends Fragment {
 
     View view;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_planner, container, false);
+        view = inflater.inflate(R.layout.fragment_user_profile, container, false);
         return view;
     }
 

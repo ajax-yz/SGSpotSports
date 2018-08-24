@@ -63,5 +63,7 @@
     <string name="you_may_update_your_status_here">You may update your status here</string>
     <string name="your_status">Your status</string>
     <string name="save_changes">SAVE CHANGES</string>
+    <string name="send_friend_request">Send friend request</string>
+    <string name="decline_friend_request">decline friend request</string>
 
 </resources>

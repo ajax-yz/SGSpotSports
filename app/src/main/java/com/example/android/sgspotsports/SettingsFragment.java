@@ -233,41 +233,52 @@ public class SettingsFragment extends Fragment {
                                     UploadTask uploadTask = thumb_filepath.putBytes(thumb_byte);
                                     uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                                         @Override
-                                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> thumb_task) {
-
-                                            
-                                            String thumb_downloadUrl = thumb_task.getResult().getMetadata().getReference().getDownloadUrl().toString();
-
-                                            if (thumb_task.isSuccessful()) {
-
-                                                Map update_hashMap = new HashMap();
-                                                update_hashMap.put("image", download_url);
-                                                update_hashMap.put("thumb_image", thumb_downloadUrl);
+                                        public void onComplete(@NonNull final Task<UploadTask.TaskSnapshot> thumb_task) {
 
 
-                                                mUserDatabase.updateChildren(update_hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                //mUserDatabase.child("image").setValue(download_url).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
+                                            // Test and check the .child("image.jpg")
+                                            mImageStorage.child("profile_images").child("thumb_images").child(current_user_id + ".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                @Override
+                                                public void onSuccess(Uri uri) {
 
-                                                        if (task.isSuccessful()) {
-                                                            mProgressDialog.dismiss();
-                                                            Toast.makeText(getActivity(), "Successfully uploaded", Toast.LENGTH_LONG).show();
-                                                        }
+                                                    String thumb_downloadUrl = uri.toString();
+
+                                                    //String thumb_downloadUrl = thumb_task.getResult().getMetadata().getReference().getDownloadUrl().toString();
+
+                                                    if (thumb_task.isSuccessful()) {
+                                                        Map update_hashMap = new HashMap();
+                                                        update_hashMap.put("image", download_url);
+                                                        update_hashMap.put("thumb_image", thumb_downloadUrl);
+
+                                                        mUserDatabase.updateChildren(update_hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                            //mUserDatabase.child("image").setValue(download_url).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<Void> task) {
+                                                                if (task.isSuccessful()) {
+                                                                    mProgressDialog.dismiss();
+                                                                    Toast.makeText(getActivity(), "Successfully uploaded", Toast.LENGTH_LONG).show();
+                                                                }
+                                                            }
+                                                        });
+                                                    } else {
+
+                                                        Toast.makeText(getActivity(), "Error in uploading", Toast.LENGTH_LONG).show();
+                                                        mProgressDialog.dismiss();
                                                     }
-                                                });
-                                            }
 
+                                                }
+                                            });
                                         }
                                     });
-                                }
-                            });
 
+                                }
+
+                            });
                         } else {
 
                             Toast.makeText(getActivity(), "Error in uploading", Toast.LENGTH_LONG).show();
                             mProgressDialog.dismiss();
-
                         }
                     }
                 });

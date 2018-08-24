@@ -27,6 +27,8 @@ import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class UserProfileFragment extends Fragment {
 
     private View view;
@@ -75,7 +77,7 @@ public class UserProfileFragment extends Fragment {
         mFriendReqDatabase = FirebaseDatabase.getInstance().getReference().child("Friend_request");
         mCurrent_User = FirebaseAuth.getInstance().getCurrentUser();
 
-        mProfileImage = (ImageView) view.findViewById(R.id.user_profile_photo);
+        mProfileImage = (CircleImageView) view.findViewById(R.id.user_profile_photo);
         mProfileName = (TextView) view.findViewById(R.id.user_profile_name);
         mProfileStatus = (TextView) view.findViewById(R.id.user_profile_status);
         mProfileFriendsCount = (TextView) view.findViewById(R.id.user_friends_count);

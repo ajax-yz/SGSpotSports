@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -87,6 +88,25 @@ public class UsersFragment extends Fragment {
                 usersViewHolder.setDisplayName(users.getName());
                 usersViewHolder.setUserStatus(users.getStatus());
                 usersViewHolder.setUserImage(users.getThumb_image());
+
+                final String user_id = getRef(position).getKey();
+
+                usersViewHolder.mView.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+
+                        // Send user id to another fragment
+                        UserProfileFragment userProfileFragment = new UserProfileFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("user_id", user_id);
+                        userProfileFragment.setArguments(bundle);
+
+                        FragmentManager manager = getFragmentManager();
+                        manager.beginTransaction().replace(R.id.fragment_container,
+                                userProfileFragment).commit();
+
+                    }
+                });
 
             }
 

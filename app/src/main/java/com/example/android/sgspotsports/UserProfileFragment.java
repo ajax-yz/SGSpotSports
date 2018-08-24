@@ -7,10 +7,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 public class UserProfileFragment extends Fragment {
 
-    View view;
+    private View view;
+
+    private TextView mDisplayID;
+
+    // private String user_id;
 
     @Nullable
     @Override
@@ -22,6 +27,22 @@ public class UserProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        Bundle bundle = getArguments();
+
+        //user_id = null;
+
+        if (bundle != null) {
+            String user_id = bundle.getString("user_id");
+            mDisplayID = (TextView) view.findViewById(R.id.profile_displayName);
+            mDisplayID.setText(user_id);
+        }
+
+        /*
+        mDisplayID = (TextView) view.findViewById(R.id.profile_displayName);
+
+        mDisplayID.setText(user_id);
+        */
 
     }
 }

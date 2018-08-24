@@ -204,7 +204,7 @@ public class SettingsFragment extends Fragment {
                             .setMaxHeight(200)
                             .setQuality(100)
                             .compressToBitmap(thumb_filePath);
-                } catch (IOException e) {
+                }  catch (IOException e) {
                     e.printStackTrace();
                 }
 
@@ -213,7 +213,7 @@ public class SettingsFragment extends Fragment {
                 final byte[] thumb_byte = baos.toByteArray();
 
                 StorageReference filepath = mImageStorage.child("profile_images").child(current_user_id + ".jpg");
-                final StorageReference thumb_filepath = mImageStorage.child("profiles_images").child("thumb_images").child(current_user_id + ".jpg");
+                final StorageReference thumb_filepath = mImageStorage.child("profile_images").child("thumb_images").child(current_user_id + ".jpg");
 
                 filepath.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -235,6 +235,7 @@ public class SettingsFragment extends Fragment {
                                         @Override
                                         public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> thumb_task) {
 
+                                            
                                             String thumb_downloadUrl = thumb_task.getResult().getMetadata().getReference().getDownloadUrl().toString();
 
                                             if (thumb_task.isSuccessful()) {

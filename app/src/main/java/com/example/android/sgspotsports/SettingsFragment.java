@@ -30,6 +30,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
@@ -91,8 +93,13 @@ public class SettingsFragment extends Fragment {
         // Retrieving user uid
 
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
+
         final String current_uid = mCurrentUser.getUid();
+
         mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(current_uid);
+
+        // For Offline capability
+        mUserDatabase.keepSynced(true);
 
         mImageStorage = FirebaseStorage.getInstance().getReference();
 
@@ -102,7 +109,7 @@ public class SettingsFragment extends Fragment {
 
                 String name = dataSnapshot.child("name").getValue().toString();
                 String status = dataSnapshot.child("status").getValue().toString();
-                String image = dataSnapshot.child("image").getValue().toString();
+                final String image = dataSnapshot.child("image").getValue().toString();
                 String thumb_image = dataSnapshot.child("thumb_image").getValue().toString();
 
                 mName.setText(name);
@@ -110,7 +117,22 @@ public class SettingsFragment extends Fragment {
 
                 if (!image.equals("default")) {
 
-                    Picasso.get().load(image).placeholder(R.drawable.ic_avatar).into(mDisplayImage);
+                    // Try to load image offline (faster speed)
+                    Picasso.get().load(image).networkPolicy(NetworkPolicy.OFFLINE)
+                            .placeholder(R.drawable.ic_avatar).into(mDisplayImage, new Callback() {
+                        @Override
+                        public void onSuccess() {
+
+                            // Do nothing
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+
+                            Picasso.get().load(image).placeholder(R.drawable.ic_avatar).into(mDisplayImage);
+
+                        }
+                    });
 
                 }
 

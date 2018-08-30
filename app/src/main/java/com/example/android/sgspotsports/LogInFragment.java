@@ -131,6 +131,12 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
 
                                             if (task.isSuccessful()) {
 
+                                                //finish();
+                                                // Changed to profile fragment for videoing
+                                                //SetupSetupFragment setupFragment = new SetupSetupFragment();
+                                                FragmentManager manager = getFragmentManager();
+                                                manager.beginTransaction().replace(R.id.fragment_container,
+                                                        new ProfileFragment()).commit();
                                                 //Toast.makeText(getActivity(), "Successfully uploaded token", Toast.LENGTH_SHORT).show();
 
                                             } else {
@@ -144,13 +150,6 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
                         }
                     });
 
-
-                    //finish();
-                    // Changed to profile fragment for videoing
-                    //SetupSetupFragment setupFragment = new SetupSetupFragment();
-                    FragmentManager manager = getFragmentManager();
-                    manager.beginTransaction().replace(R.id.fragment_container,
-                            new ProfileFragment()).commit();
                     // Add to back stack for fragment (back button) intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP);
                 } else {
                     mLoginProgress.hide();

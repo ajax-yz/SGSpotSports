@@ -66,5 +66,16 @@
     <string name="send_friend_request">Send friend request</string>
     <string name="decline_friend_request">decline friend request</string>
     <string name="default_notification_channel_id">SSS_CH_01</string>
+    <string name="save_to_calendar">Save to Calendar</string>
+    <string name="select_date">SELECT DATE</string>
+    <string name="select_start_time">SELECT START TIME</string>
+    <string name="select_end_time">SELECT END TIME</string>
+
+    <string name="start_time_input"><![CDATA[Select Start Time —>]]></string>
+    <string name="end_time_input"><![CDATA[Select End Time —>]]></string>
+    <string name="date_input"><![CDATA[Select Date —>]]></string>
+
+    <string name="activity_title">Activity Title:</string>
+    <string name="activity_information">Activity Information:</string>
 
 </resources>

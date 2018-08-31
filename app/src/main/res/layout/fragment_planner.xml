@@ -1,14 +1,179 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_purple">
+    android:background="@drawable/orange_gradient_small"
+    >
 
-    <TextView
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Planner Fragment"
-        android:textSize="30sp"
-        android:layout_centerInParent="true"/>
+        android:layout_centerHorizontal="true"
+        android:id="@+id/select_date"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        >
+
+        <EditText
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/in_date"
+            android:fontFamily="sans-serif"
+            android:hint="@string/date_input"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
+            android:layout_marginEnd="10dp"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/select_date"
+            android:id="@+id/btn_date"
+            android:textSize="12sp"
+            android:layout_alignBottom="@+id/in_date"
+            android:layout_toEndOf="@+id/in_date"
+            android:background="@drawable/rounded_button_transparent"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:textColor="@color/icons"
+            android:textStyle="bold"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/start_time"
+        android:layout_below="@+id/select_date"
+        >
+
+        <EditText
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/in_start_time"
+            android:fontFamily="sans-serif"
+            android:hint="@string/start_time_input"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
+            android:layout_marginEnd="10dp"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/select_start_time"
+            android:textSize="12sp"
+            android:id="@+id/btn_start_time"
+            android:layout_alignBottom="@+id/in_start_time"
+            android:layout_toEndOf="@+id/in_start_time"
+            android:background="@drawable/rounded_button_transparent"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="@color/icons"
+            android:textStyle="bold"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/end_time"
+        android:layout_below="@+id/start_time"
+        android:layout_marginTop="10dp"
+        >
+
+        <EditText
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/in_end_time"
+            android:fontFamily="sans-serif"
+            android:hint="@string/end_time_input"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
+            android:layout_marginEnd="10dp"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/select_end_time"
+            android:textSize="12sp"
+            android:id="@+id/btn_end_time"
+            android:layout_alignBottom="@+id/in_end_time"
+            android:layout_toEndOf="@+id/in_end_time"
+            android:background="@drawable/rounded_button_transparent"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:textColor="@color/icons"
+            android:textStyle="bold"/>
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/end_time"
+        android:id="@+id/activity_title_info">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/activity_title"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"/>
+
+    <EditText
+        android:id="@+id/edit_activity_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailSubject"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@android:color/white"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/activity_information"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/edit_activity_information"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="4"
+        android:gravity="start|top"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@android:color/white"
+        />
+
+    </LinearLayout>
+
+    <Button
+        android:layout_below="@+id/activity_title_info"
+        android:id="@+id/save_date_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rounded_button_solid"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:text="@string/save_to_calendar"
+        android:textColor="@color/icons"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:layout_centerHorizontal="true"
+        />
 
 </RelativeLayout>

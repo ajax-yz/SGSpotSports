@@ -65,5 +65,6 @@
     <string name="save_changes">SAVE CHANGES</string>
     <string name="send_friend_request">Send friend request</string>
     <string name="decline_friend_request">decline friend request</string>
+    <string name="default_notification_channel_id">SSS_CH_01</string>
 
 </resources>

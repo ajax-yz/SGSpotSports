@@ -229,7 +229,7 @@ public class UserProfileFragment extends Fragment {
 
                            } else {
 
-                               Toast.makeText(getActivity(), "Successfully uploaded", Toast.LENGTH_SHORT).show();
+                               Toast.makeText(getActivity(), "Successfully sent friend request", Toast.LENGTH_SHORT).show();
                            }
                             mProfileSendReqBtn.setEnabled(true);
 
@@ -266,6 +266,8 @@ public class UserProfileFragment extends Fragment {
 
                                                             mDeclineReqBtn.setVisibility(View.INVISIBLE);
                                                             mDeclineReqBtn.setEnabled(false);
+
+                                                            Toast.makeText(getContext(), "Successfully cancelled friend request", Toast.LENGTH_SHORT).show();
 
                                                         } else {
 
@@ -381,8 +383,8 @@ public class UserProfileFragment extends Fragment {
                             mCurrent_State = "not friends";
                             mProfileSendReqBtn.setText("Send Friend Request");
 
-                            //mDiclineBnt.setVisibility(View.INVISIBLE);
-                            //mDiclineBnt.setEnabled(false);
+                            mDeclineReqBtn.setVisibility(View.INVISIBLE);
+                            mDeclineReqBtn.setEnabled(false);
 
                         }else{
                             String error = databaseError.getMessage();

@@ -29,9 +29,8 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         // NotificationChannel kakiChannel = new NotificationChannel(kakiId, "Friends", NotificationManager.IMPORTANCE_DEFAULT);
 
         //NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        String kakiId = "kaki_id";
 
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, kakiId)
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, getString(R.string.default_notification_channel_id))
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(notification_title)
                 .setContentText(notification_message)

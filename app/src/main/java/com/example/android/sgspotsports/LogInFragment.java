@@ -1,16 +1,19 @@
 package com.example.android.sgspotsports;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -138,6 +141,7 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
                                                 manager.beginTransaction().replace(R.id.fragment_container,
                                                         new ProfileFragment()).commit();
                                                 //Toast.makeText(getActivity(), "Successfully uploaded token", Toast.LENGTH_SHORT).show();
+                                                hideSoftKeyboard();
 
                                             } else {
 
@@ -199,6 +203,15 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
                         new ForgotPasswordFragment()).commit();
                 break;
         }
+    }
+
+    // Hides the keyboard after searching
+    private void hideSoftKeyboard() {
+
+        FragmentActivity activity = getActivity();
+
+        InputMethodManager in = (InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(editTextEmail.getWindowToken(), 0);
     }
 
 }

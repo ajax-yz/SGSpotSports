@@ -332,7 +332,7 @@ public class UserProfileFragment extends Fragment {
 
                     Map friendsMap = new HashMap();
                     friendsMap.put("Friends/" + mCurrent_User.getUid() + "/" + user_id + "/date", currentDate);
-                    friendsMap.put("Friend/" + user_id + "/" + mCurrent_User.getUid() + "/date", currentDate);
+                    friendsMap.put("Friends/" + user_id + "/" + mCurrent_User.getUid() + "/date", currentDate);
 
                     friendsMap.put("Friend_request/" + mCurrent_User.getUid() + "/" + user_id, null);
                     friendsMap.put("Friend_request/" + user_id + "/" + mCurrent_User.getUid(), null);

@@ -30,8 +30,8 @@
             android:padding="10dp"
             app:srcCompat="@drawable/ic_add_btn" />
 
-        <TextView
-            android:id="@+id/textView2"
+        <EditText
+            android:id="@+id/messaging_dialog"
             android:layout_width="273dp"
             android:layout_height="match_parent"
             android:layout_alignTop="@+id/messaging_add"
@@ -42,7 +42,7 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingTop="16dp"
-            android:text="TextView" />
+            android:hint="Enter Message..." />
 
         <ImageButton
             android:id="@+id/messaging_send"

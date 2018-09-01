@@ -129,7 +129,7 @@ public class SettingsFragment extends Fragment {
                         @Override
                         public void onError(Exception e) {
 
-                            Picasso.get().load(image).placeholder(R.drawable.ic_avatar).into(mDisplayImage);
+                            Picasso.get().load(image).placeholder(R.drawable.ic_default_avatar).into(mDisplayImage);
 
                         }
                     });

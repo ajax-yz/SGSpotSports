@@ -139,8 +139,7 @@ public class FriendsFragment extends Fragment {
                                             switch(position) {
                                                 case 0:
 
-                                                    // create bundle and pass user id
-                                                    //userprofilefragment
+                                                    // create bundle and pass user id to user profile frag
 
                                                     UserProfileFragment userProfileFragment = new UserProfileFragment();
                                                     Bundle bundle = new Bundle();

@@ -165,7 +165,7 @@ public class UsersFragment extends Fragment {
 
             CircleImageView userImageView = (CircleImageView) mView.findViewById(R.id.user_single_image);
 
-            Picasso.get().load(thumb_image).placeholder(R.drawable.ic_avatar).into(userImageView);
+            Picasso.get().load(thumb_image).placeholder(R.drawable.ic_default_avatar).into(userImageView);
         }
 
     }

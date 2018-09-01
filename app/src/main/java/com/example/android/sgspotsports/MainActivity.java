@@ -9,6 +9,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -61,11 +63,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         contextOfApplication = getApplicationContext();
 
         // Start of code for navigation drawer
-        mToolbar = findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.main_app_bar);
         setSupportActionBar(mToolbar);
-
         // Set title of toolbar (doesn't work)
         // getSupportActionBar().setTitle("Sports Facility Locator");
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Sports Facility Locator");
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
 
         drawer = findViewById(R.id.drawer_layout);
 
@@ -263,7 +268,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else {
 
-            mUserRef.child("online").setValue(true);
+            mUserRef.child("online").setValue("true");
         }
     }
 
@@ -273,7 +278,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onStop();
 
         if (mAuth.getCurrentUser() != null) {
-            mUserRef.child("online").setValue(false);
+            mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
+            //mUserRef.child("online").setValue(false);
+            //mUserRef.child("last_seen").setValue(ServerValue.TIMESTAMP);
         }
     }
 

@@ -41,7 +41,8 @@
         android:layout_width="18dp"
         android:layout_height="18dp"
         android:layout_alignBottom="@+id/user_single_name"
-        android:layout_toEndOf="@+id/user_single_status"
+        android:layout_toEndOf="@+id/user_single_name"
+        android:layout_marginStart="10dp"
         android:paddingBottom="2dp"
         android:visibility="visible"
         app:srcCompat="@drawable/ic_online_dot" />

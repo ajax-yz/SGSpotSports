@@ -2,8 +2,10 @@ package com.example.android.sgspotsports;
 
 
 import android.app.AlertDialog;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
@@ -44,7 +46,7 @@ public class FriendsFragment extends Fragment {
 
     private FirebaseAuth mAuth;
 
-    private String mCurrent_user_id;
+    private String mCurrent_user_id, userName, userThumb, userStatus;
 
     private View mMainView;
 
@@ -101,19 +103,19 @@ public class FriendsFragment extends Fragment {
                 //friendsViewHolder.setDate(friends.getDate());
 
                 // get user id from database
-                String list_user_id = getRef(position).getKey();
+                final String list_user_id = getRef(position).getKey();
 
                     mUsersDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                            String userName = dataSnapshot.child("name").getValue().toString();
-                            String userThumb = dataSnapshot.child("thumb_image").getValue().toString();
-                            String userStatus = dataSnapshot.child("status").getValue().toString();
+                            userName = dataSnapshot.child("name").getValue().toString();
+                            userThumb = dataSnapshot.child("thumb_image").getValue().toString();
+                            userStatus = dataSnapshot.child("status").getValue().toString();
 
                             if (dataSnapshot.hasChild("online")) {
 
-                                Boolean userOnline = (boolean) dataSnapshot.child("online").getValue();
+                                String userOnline = dataSnapshot.child("online").getValue().toString();
                                 friendsViewHolder.setUserOnline(userOnline);
                             }
 
@@ -132,12 +134,39 @@ public class FriendsFragment extends Fragment {
                                     builder.setTitle("Select Options");
                                     builder.setItems(options, new DialogInterface.OnClickListener() {
                                         @Override
-                                        public void onClick(DialogInterface dialog, int which) {
+                                        public void onClick(DialogInterface dialog, int position) {
 
-                                            // Click events
-                                            
+                                            switch(position) {
+                                                case 0:
+
+                                                    // create bundle and pass user id
+                                                    //userprofilefragment
+
+                                                    UserProfileFragment userProfileFragment = new UserProfileFragment();
+                                                    Bundle bundle = new Bundle();
+                                                    bundle.putString("user_id", list_user_id);
+                                                    userProfileFragment.setArguments(bundle);
+
+                                                    android.support.v4.app.FragmentManager manager = getFragmentManager();
+                                                    manager.beginTransaction().replace(R.id.fragment_container,
+                                                            userProfileFragment).commit();
+
+                                                    break;
+
+                                                case 1:
+
+                                                    Intent messagingIntent = new Intent(getContext(), MessagingActivity.class);
+                                                    messagingIntent.putExtra("user_id", list_user_id);
+                                                    messagingIntent.putExtra("user_name", userName);
+                                                    startActivity(messagingIntent);
+
+                                                    break;
+                                            }
+
                                         }
                                     });
+
+                                    builder.show();
 
                                 }
                             });
@@ -202,15 +231,15 @@ public class FriendsFragment extends Fragment {
 
             CircleImageView userImageView = (CircleImageView) mView.findViewById(R.id.user_single_image);
 
-            Picasso.get().load(thumb_image).placeholder(R.drawable.ic_avatar).into(userImageView);
+            Picasso.get().load(thumb_image).placeholder(R.drawable.ic_default_avatar).into(userImageView);
 
         }
 
-        public void setUserOnline(boolean online_status) {
+        public void setUserOnline(String online_status) {
 
             ImageView userOnlineView = (ImageView) mView.findViewById(R.id.user_single_online_icon);
 
-            if (online_status == true) {
+            if (online_status.equals("true")) {
 
                 userOnlineView.setVisibility(View.VISIBLE);
 

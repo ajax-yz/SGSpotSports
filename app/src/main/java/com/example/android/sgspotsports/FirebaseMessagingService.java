@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 
@@ -31,10 +32,25 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         //NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, getString(R.string.default_notification_channel_id))
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.ic_app_icon_64) // R.mipmap.ic_launcher
                 .setContentTitle(notification_title)
                 .setContentText(notification_message)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+        /* Note: setColor is only available in Lollipop and it only affect to background of the icon.
+         * Use the code below to further customise the notification icon
+         * https://docs.accengage.com/display/AND/Notification+Icons
+
+        Notification notification = new NotificationCompat.Builder(this);
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            notification.setSmallIcon(R.drawable.icon_transperent);
+            notification.setColor(getResources().getColor(R.color.notification_color));
+        } else {
+            notification.setSmallIcon(R.drawable.icon);
+        }
+
+        */
+
 
         // Create an explicit intent for an Activity in your app
         Intent resultIntent = new Intent(click_action);

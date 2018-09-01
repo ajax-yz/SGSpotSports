@@ -119,7 +119,7 @@ public class SettingsFragment extends Fragment {
 
                     // Try to load image offline (faster speed)
                     Picasso.get().load(image).networkPolicy(NetworkPolicy.OFFLINE)
-                            .placeholder(R.drawable.ic_avatar).into(mDisplayImage, new Callback() {
+                            .placeholder(R.drawable.ic_default_avatar).into(mDisplayImage, new Callback() {
                         @Override
                         public void onSuccess() {
 

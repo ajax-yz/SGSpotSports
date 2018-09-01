@@ -75,8 +75,10 @@ public class SetupFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
 
 
+        /*
         Toolbar toolbar = view.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        */
 
         mDisplayName = (EditText) view.findViewById(R.id.editTextDisplayName);
         imageView = (ImageView) view.findViewById(R.id.imageView);

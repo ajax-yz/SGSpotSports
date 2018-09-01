@@ -133,7 +133,7 @@
         android:id="@+id/edit_activity_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textEmailSubject"
+        android:inputType="textCapSentences"
         android:textColor="@android:color/white"
         android:backgroundTint="@android:color/white"
         />
@@ -149,6 +149,7 @@
 
     <EditText
         android:id="@+id/edit_activity_information"
+        android:inputType="textCapSentences|textMultiLine"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:lines="4"
@@ -166,7 +167,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:background="@drawable/rounded_button_solid"
+        android:background="@drawable/rounded_button_transparent"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
         android:text="@string/save_to_calendar"

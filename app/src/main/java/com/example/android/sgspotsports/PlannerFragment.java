@@ -125,7 +125,20 @@ public class PlannerFragment extends DialogFragment implements View.OnClickListe
                             public void onTimeSet(TimePicker view, int hourOfDay,
                                                   int minute) {
 
-                                txtStartTime.setText(hourOfDay + ":" + minute);
+
+                                // Consider cases when minute = 00, 01 to 09
+                                if (minute == 0) {
+
+                                    txtStartTime.setText(hourOfDay + ":" + minute + minute);
+
+                                } else if (minute > 0 && minute < 10) {
+
+                                    txtStartTime.setText(hourOfDay + ":0" + minute);
+                                } else {
+
+                                    txtStartTime.setText(hourOfDay + ":" + minute);
+
+                                }
 
                                 PlannerFragment.this.mStartHour = hourOfDay;
                                 PlannerFragment.this.mStartMinute = minute;
@@ -150,7 +163,20 @@ public class PlannerFragment extends DialogFragment implements View.OnClickListe
                             public void onTimeSet(TimePicker view, int hourOfDay,
                                                   int minute) {
 
-                                txtEndTime.setText(hourOfDay + ":" + minute);
+                                // Consider cases when minute = 00, 01 to 09
+                                if (minute == 0) {
+
+                                    txtEndTime.setText(hourOfDay + ":" + minute + minute);
+
+                                } else if (minute > 0 && minute < 10) {
+
+                                    txtEndTime.setText(hourOfDay + ":0" + minute);
+
+                                } else {
+
+                                    txtEndTime.setText(hourOfDay + ":" + minute);
+
+                                }
 
                                 PlannerFragment.this.mEndHour = hourOfDay;
                                 PlannerFragment.this.mEndMinute = minute;
@@ -204,7 +230,7 @@ public class PlannerFragment extends DialogFragment implements View.OnClickListe
             startActivity(calendarIntent);
 
         } else {
-            Toast.makeText(getActivity(), "Please enter a valid Start and End time, *End time should be later than Start time*", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), " Please enter a valid Start and End time \n *End time should be later than Start time*", Toast.LENGTH_LONG).show();
         }
     }
 

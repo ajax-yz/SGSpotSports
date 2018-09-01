@@ -1,5 +1,6 @@
 package com.example.android.sgspotsports;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -22,12 +23,16 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     // Variable for navigation drawer
     private DrawerLayout drawer;
     private FirebaseAuth mAuth;
+
+    private DatabaseReference mUserRef;
 
     private Toolbar mToolbar;
 
@@ -47,6 +52,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
+
+        if (mAuth.getCurrentUser() != null) {
+            mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+        }
 
         // Passing context
         contextOfApplication = getApplicationContext();
@@ -104,10 +113,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.nav_kaki:
-                getSupportFragmentManager().beginTransaction()
-                        .addToBackStack(null)
-                        .replace(R.id.fragment_container,
-                        new KakiFragment()).commit();
+
+                if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+                    getSupportFragmentManager().beginTransaction()
+                            .addToBackStack(null)
+                            .replace(R.id.fragment_container,
+                                    new KakiFragment()).commit();
+                } else {
+                    Toast.makeText(this,"Please login first to access the kaki function", Toast.LENGTH_SHORT).show();
+                }
+
+
                 break;
 
             /*
@@ -231,6 +247,42 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         return true;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        //Check if user is signed in (non-null) and update UI accordingly
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if(currentUser == null) {
+
+            // Forces users to login, CAN EXCLUDE THE CODE. BUT LOOKS GOOD
+            sendToLogin();
+
+        } else {
+
+            mUserRef.child("online").setValue(true);
+        }
+    }
+
+    // Whenever app is minimise
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        if (mAuth.getCurrentUser() != null) {
+            mUserRef.child("online").setValue(false);
+        }
+    }
+
+    private void sendToLogin() {
+
+        FragmentManager manager = getSupportFragmentManager();
+        manager.beginTransaction().replace(R.id.fragment_container,
+                new LogInFragment()).commit();
+
     }
 
     /* Consider to check if the user is currently logged in

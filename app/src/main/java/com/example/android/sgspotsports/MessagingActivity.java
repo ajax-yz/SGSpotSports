@@ -123,7 +123,7 @@ public class MessagingActivity extends AppCompatActivity {
         mMessageSendBtn = (ImageButton) findViewById(R.id.messaging_send);
         mMessageView = (EditText) findViewById(R.id.messaging_dialog);
 
-        mAdapter = new MessageAdapter(messagesList);
+        mAdapter = new MessageAdapter(this, messagesList);
 
         mMessagesList = (RecyclerView) findViewById(R.id.messages_list);
         mRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_message_layout);

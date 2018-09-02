@@ -25,4 +25,15 @@
         android:textColor="@color/icons"
         android:textSize="14sp" />
 
+    <TextView
+        android:id="@+id/time_text_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/message_profile_layout"
+        android:layout_marginEnd="155dp"
+        android:layout_marginStart="10dp"
+        android:layout_toRightOf="@+id/message_text_layout"
+        android:text="00:00" />
+
 </RelativeLayout>

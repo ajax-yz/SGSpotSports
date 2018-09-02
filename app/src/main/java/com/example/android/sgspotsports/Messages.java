@@ -2,7 +2,7 @@ package com.example.android.sgspotsports;
 
 public class Messages {
 
-    private String message, type;//, from;
+    private String message, type, from;
     private long time;
     private boolean seen;
 
@@ -11,7 +11,7 @@ public class Messages {
         this.seen = seen;
         this.time = time;
         this.type = type;
-        //this.from = from;
+        this.from = from;
 
     }
 
@@ -49,6 +49,14 @@ public class Messages {
 
     public void setSeen(boolean seen) {
         this.seen = seen;
+    }
+
+    public String getFrom() {
+        return from;
+    }
+
+    public void setFrom(String from) {
+        this.from = from;
     }
 
     /*

@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
+    <!-- Set to invisible since our chat bubble has photo already -->
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/custom_bar_image"
         android:layout_width="40dp"
@@ -10,7 +11,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginRight="10dp"
         android:layout_marginTop="2dp"
-        android:src="@drawable/ic_default_avatar" />
+        android:src="@drawable/ic_default_avatar"
+        android:visibility="invisible"/>
 
     <TextView
         android:id="@+id/custom_bar_title"

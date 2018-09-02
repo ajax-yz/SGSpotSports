@@ -24,11 +24,11 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MessageAdapter extends RecyclerView.Adapter{
+public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private List<Messages> mMessageList;
     private Context mContext;
-    private FirebaseAuth mAuth;
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private DatabaseReference mUserDatabase;
     private static final int VIEW_TYPE_MESSAGE_SENT = 1;
     private static final int VIEW_TYPE_MESSAGE_RECEIVED = 2;
@@ -49,15 +49,19 @@ public class MessageAdapter extends RecyclerView.Adapter{
 
         return new MessageViewHolder (v);
         */
+        Log.d("VIEW TYPE:", String.valueOf(viewType));
 
         View view;
 
         if (viewType == VIEW_TYPE_MESSAGE_SENT) {
             view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.sender_message_single_layout, parent, false);
+            return new SentMessageHolder(view);
+
         } else if (viewType == VIEW_TYPE_MESSAGE_RECEIVED) {
             view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.receiver_message_single_layout,parent, false);
+            return new ReceivedMessageHolder(view);
         }
 
         return null;
@@ -70,12 +74,18 @@ public class MessageAdapter extends RecyclerView.Adapter{
 
         Messages message = (Messages) mMessageList.get(position);
 
+        Log.d("ITEM TYPE:", String.valueOf(viewHolder.getItemViewType()));
+        Log.d("VIEW TYPE MESSAGE SENT:", String.valueOf(VIEW_TYPE_MESSAGE_SENT));
+
         switch (viewHolder.getItemViewType()) {
             case VIEW_TYPE_MESSAGE_SENT:
                 ((SentMessageHolder) viewHolder).bind(message);
+            break;
 
             case VIEW_TYPE_MESSAGE_RECEIVED:
                 ((ReceivedMessageHolder) viewHolder).bind(message);
+
+                break;
         }
     }
 
@@ -143,6 +153,7 @@ public class MessageAdapter extends RecyclerView.Adapter{
             // Set profile photo
             mUserDatabase = FirebaseDatabase.getInstance().getReference()
                     .child("Users").child(from_user);
+            mUserDatabase.keepSynced(true);
 
             mUserDatabase.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -165,6 +176,7 @@ public class MessageAdapter extends RecyclerView.Adapter{
                 // Set text
                 messageText.setText(message.getMessage());
                 messageImage.setVisibility(View.INVISIBLE);
+
             } else {
 
                 messageText.setVisibility(View.INVISIBLE);
@@ -202,6 +214,7 @@ public class MessageAdapter extends RecyclerView.Adapter{
             // Set profile photo
             mUserDatabase = FirebaseDatabase.getInstance().getReference()
                     .child("Users").child(from_user);
+            mUserDatabase.keepSynced(true);
 
             mUserDatabase.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -269,11 +282,13 @@ public class MessageAdapter extends RecyclerView.Adapter{
     @Override
     public int getItemViewType(int position) {
 
-        mAuth = FirebaseAuth.getInstance();
         String current_user_id = mAuth.getCurrentUser().getUid();
 
         Messages message = (Messages) mMessageList.get(position);
         String from_user = message.getFrom();
+
+        Log.d("FROM USER:", from_user);
+        Log.d("CURRENT_USER_ID:", current_user_id);
 
         if (from_user.equals(current_user_id)){
             // If the current user is the sender of the message

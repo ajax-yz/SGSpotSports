@@ -61,6 +61,8 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingTop="16dp"
+            android:ems="10"
+            android:inputType="text"
             android:hint="Enter Message..." />
 
         <ImageButton

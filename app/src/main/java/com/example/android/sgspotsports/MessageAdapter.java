@@ -94,7 +94,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             } else {
 
                 // The other party sent the message
-                viewHolder.messageText.setBackgroundResource(R.drawable.message_text_background);
+                viewHolder.messageText.setBackgroundResource(R.drawable.sender_sender_message_text_background);
                 viewHolder.messageText.setTextColor(Color.WHITE);
 
             }

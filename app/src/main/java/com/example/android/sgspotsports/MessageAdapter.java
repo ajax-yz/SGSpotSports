@@ -30,6 +30,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     @Override
     public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
+        /* Original code
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.message_single_layout, parent, false);
+        */
+
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.message_single_layout, parent, false);
 
@@ -41,17 +46,17 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
         public TextView messageText;
         public CircleImageView profileImage;
-        public TextView displayName;
+        // public TextView displayName;
         public ImageView messageImage;
 
         public MessageViewHolder(View view) {
 
             super(view);
 
-            messageText = (TextView) view.findViewById(R.id.message_text_layout);
-            profileImage = (CircleImageView) view.findViewById(R.id.message_profile_layout);
             // displayName = (TextView) view.findViewById(____);
             // messageImage = (ImageView) view.findViewById(____);
+            messageText = (TextView) view.findViewById(R.id.message_text_layout);
+            profileImage = (CircleImageView) view.findViewById(R.id.message_profile_layout);
             messageImage = (ImageView) view.findViewById(R.id.message_image_layout);
         }
 

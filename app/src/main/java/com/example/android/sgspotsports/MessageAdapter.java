@@ -21,6 +21,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
     private List<Messages> mMessageList;
     private FirebaseAuth mAuth;
+    private static final int VIEW_TYPE_MESSAGE_SENT = 1;
+    private static final int VIEW_TYPE_MESSAGE_RECEIVED = 2;
 
     public MessageAdapter(List<Messages> mMessageList) {
         this.mMessageList = mMessageList;
@@ -33,18 +35,28 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         /* Original code
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.message_single_layout, parent, false);
-        */
 
-        View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.message_single_layout, parent, false);
 
         return new MessageViewHolder (v);
+        */
+
+        View view;
+
+        if (viewType == VIEW_TYPE_MESSAGE_SENT) {
+            view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.sender_message_single_layout, parent, false);
+        } else if (viewType == VIEW_TYPE_MESSAGE_RECEIVED) {
+            view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.receiver_message_single_layout,parent, false);
+        }
+
+        return null;
 
     }
 
     public class MessageViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView messageText;
+        public TextView messageText, timeText;
         public CircleImageView profileImage;
         // public TextView displayName;
         public ImageView messageImage;
@@ -123,4 +135,24 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     public int getItemCount() {
         return mMessageList.size();
     }
+
+    // Determines the appropriate ViewType according to the sender of the message.
+    @Override
+    public int getItemViewType(int position) {
+
+        mAuth = FirebaseAuth.getInstance();
+        String current_user_id = mAuth.getCurrentUser().getUid();
+
+        Messages message = (Messages) mMessageList.get(position);
+        String from_user = message.getFrom();
+
+        if (from_user.equals(current_user_id)){
+            // If the current user is the sender of the message
+            return VIEW_TYPE_MESSAGE_SENT;
+        } else {
+            // If some other user sent the message
+            return VIEW_TYPE_MESSAGE_RECEIVED;
+        }
+    }
+
 }

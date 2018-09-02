@@ -36,4 +36,18 @@
         android:layout_toRightOf="@+id/message_text_layout"
         android:text="00:00" />
 
+    <ImageView
+        android:id="@+id/message_image_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignStart="@+id/message_text_layout"
+        android:layout_below="@+id/message_text_layout"
+        android:layout_marginLeft="0dp"
+        android:layout_toEndOf="@+id/message_profile_layout"
+        android:padding="0dp"
+        android:scaleType="centerCrop" />
+
+    <!-- consider adding background for ImageView -->
+
 </RelativeLayout>

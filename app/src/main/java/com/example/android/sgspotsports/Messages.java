@@ -6,16 +6,20 @@ public class Messages {
     private long time;
     private boolean seen;
 
-    public Messages(String message, boolean seen, long time, String type, String from) {
+    public Messages(String message, boolean seen, long time, String type) {
         this.message = message;
         this.seen = seen;
         this.time = time;
         this.type = type;
+    }
+
+    public Messages(String from) {
+
         this.from = from;
 
     }
 
-    public Messages() {
+    public Messages () {
 
     }
 

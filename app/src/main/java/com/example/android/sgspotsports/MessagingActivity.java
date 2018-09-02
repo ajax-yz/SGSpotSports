@@ -77,7 +77,7 @@ public class MessagingActivity extends AppCompatActivity {
 
     private MessageAdapter mAdapter;
 
-    private static final int GALLERY_PICK = 101;
+    private static final int GALLERY_PICK = 1107;
     private static final int TOTAL_ITEMS_TO_LOAD = 10;
     private int mCurrentPage = 1;
 
@@ -270,7 +270,7 @@ public class MessagingActivity extends AppCompatActivity {
             final String push_id = user_message_push.getKey();
 
 
-            StorageReference filepath = mImageStorage.child("message_images").child( push_id + ".jpg");
+            StorageReference filepath = mImageStorage.child("message_images").child(push_id + ".jpg");
 
             filepath.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                 @Override
@@ -284,8 +284,8 @@ public class MessagingActivity extends AppCompatActivity {
                         //    final String download_url = uri.toString();
                         */
 
-                        mImageStorage.child("message_images").child("message_images")
-                        .child(push_id + ".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        mImageStorage.child("message_images").child(push_id + ".jpg")
+                                .getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
 
@@ -303,7 +303,7 @@ public class MessagingActivity extends AppCompatActivity {
                                 messageUserMap.put(current_user_ref + "/" + push_id, messageMap);
                                 messageUserMap.put(chat_user_ref + "/" + push_id, messageMap);
 
-                                mMessageView.setText("");
+                                mMessageView.getText().clear();
 
                                 mRootRef.updateChildren(messageUserMap, new DatabaseReference.CompletionListener() {
                                     @Override

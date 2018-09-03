@@ -84,7 +84,7 @@ public class FriendsFragment extends Fragment {
 
             mFriendsList.setHasFixedSize(true);
             mFriendsList.setLayoutManager(new LinearLayoutManager(getContext()));
-            
+
     }
 
     @Override
@@ -96,7 +96,8 @@ public class FriendsFragment extends Fragment {
                         .setQuery(mFriendsDatabase, Friends.class)
                         .build();
 
-        FirebaseRecyclerAdapter<Friends, FriendsViewHolder> friendsRecyclerViewAdapter = new FirebaseRecyclerAdapter<Friends, FriendsViewHolder>(options) {
+        FirebaseRecyclerAdapter<Friends, FriendsViewHolder> friendsRecyclerViewAdapter =
+                new FirebaseRecyclerAdapter<Friends, FriendsViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull final FriendsViewHolder friendsViewHolder, int position, @NonNull Friends friends) {
 

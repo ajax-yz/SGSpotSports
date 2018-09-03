@@ -22,6 +22,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
@@ -215,8 +216,11 @@ public class UserProfileFragment extends Fragment {
                     notificationData.put("type", "request");
 
                     Map requestMap = new HashMap();
+
                     requestMap.put("Friend_request/" + mCurrent_User.getUid() + "/" + user_id + "/request_type" , "sent");
+                    requestMap.put("Friend_request/" + mCurrent_User.getUid() + "/" + user_id + "/timestamp" , ServerValue.TIMESTAMP);
                     requestMap.put("Friend_request/" + user_id + "/" + mCurrent_User.getUid() + "/request_type", "received");
+                    requestMap.put("Friend_request/" + user_id + "/" + mCurrent_User.getUid() + "/timestamp", ServerValue.TIMESTAMP);
                     requestMap.put("notifications/" + user_id + "/" + newNotificationId, notificationData);
 
                     mRootRef.updateChildren(requestMap, new DatabaseReference.CompletionListener() {
@@ -363,7 +367,7 @@ public class UserProfileFragment extends Fragment {
             }
         });
 
-        // Taken from comments
+        // Taken from comments (Decline friend request)
         mDeclineReqBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

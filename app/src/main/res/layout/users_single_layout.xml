@@ -44,7 +44,7 @@
         android:layout_toEndOf="@+id/user_single_name"
         android:layout_marginStart="10dp"
         android:paddingBottom="2dp"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:srcCompat="@drawable/ic_online_dot" />
 
 </RelativeLayout>

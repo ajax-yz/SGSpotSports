@@ -90,9 +90,15 @@
                 android:background="#fff"
                 android:clickable="true"
                 android:focusable="true"
-                android:elevation="4dp"
+                android:elevation="3dp"
                 android:padding="20dp"
-                android:text="@string/manage_your_list_of_markers" />
+                android:text="@string/manage_your_list_of_markers"
+                />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#c0c0c0"/>
 
             <TextView
                 android:id="@+id/text_change_image"
@@ -104,9 +110,15 @@
                 android:background="#fff"
                 android:clickable="true"
                 android:focusable="true"
-                android:elevation="4dp"
+                android:elevation="3dp"
                 android:padding="20dp"
                 android:text="@string/change_your_image" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#c0c0c0"/>
+
 
             <TextView
                 android:id="@+id/text_change_status"
@@ -116,9 +128,14 @@
                 android:background="#fff"
                 android:clickable="true"
                 android:focusable="true"
-                android:elevation="4dp"
+                android:elevation="3dp"
                 android:padding="20dp"
                 android:text="@string/change_your_status" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#c0c0c0"/>
 
         </LinearLayout>
 

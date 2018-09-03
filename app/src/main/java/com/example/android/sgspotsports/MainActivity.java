@@ -82,9 +82,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        // --------- For now the LocatorFragment has been changed to MapsFragment ------------------
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new LocatorFragment()).commit();
+                    new MapsFragment()).commit();
             //if (isServicesOK()) {
                 navigationView.setCheckedItem(R.id.nav_locator);
             //}
@@ -102,12 +103,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Clear all the back stack
         //getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
+
+        // --------- For now the LocatorFragment has been changed to MapsFragment ------------------
+
         switch(item.getItemId()) {
             case R.id.nav_locator:
                 getSupportFragmentManager().beginTransaction()
                         .addToBackStack(null)
                         .replace(R.id.fragment_container,
-                        new LocatorFragment()).commit();
+                        new MapsFragment()).commit();
                 break;
 
             case R.id.nav_planner:

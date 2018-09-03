@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MarkerInfoActivity"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/marker_info_app_bar"
+            android:background="@color/primary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        </android.support.v7.widget.Toolbar>
+
+
+        <ImageView
+            android:id="@+id/facility_background_image"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:contentDescription="@string/facility_image"
+            app:srcCompat="@drawable/ic_default_background"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp" />
+
+        <!-- FACILITY NAME AND PLACES NAME AND RATINGS -->
+
+
+        <LinearLayout
+            android:id="@+id/facility_name_linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="9"
+                >
+
+                <TextView
+                    android:id="@+id/facility_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/facility_name"
+                    android:textColor="@color/primary_text"
+                    android:textSize="18sp"
+                    android:maxLines="3"
+                    android:scrollHorizontally="false"
+                    android:ellipsize="none"
+                    />
+
+                <TextView
+                android:id="@+id/places_api_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textSize="15sp"
+                android:textColor="@color/secondary_text"
+                android:text="@string/facility_name"
+                android:maxLines="3"
+                android:scrollHorizontally="false"
+                android:ellipsize="none"
+                />
+
+            </LinearLayout>
+
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/ratingBarStyleSmall"
+                android:numStars="5"
+                android:stepSize="0.1"
+                android:isIndicator="true"
+                android:rating="5.0"
+                android:visibility="visible"
+                android:layout_weight="0"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp">
+
+        <ImageView
+            android:id="@+id/address_icon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            app:srcCompat="@drawable/ic_location_icon" />
+
+            <TextView
+                android:id="@+id/address_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Full address here"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="10dp"
+                android:textSize="15sp"
+                android:textColor="@color/secondary_text"/>
+
+        </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="#c0c0c0"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="18dp"
+        android:paddingTop="3dp"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/phone_icon"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="15dp"
+            app:srcCompat="@drawable/ic_telephone_icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/phone"
+            android:textSize="20sp"
+            android:layout_marginTop="12dp"
+            android:textColor="@color/primary_text"
+            android:textStyle="bold"
+            android:layout_marginStart="15dp"
+            />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:id="@+id/directions_button">
+
+            <ImageView
+                android:id="@+id/directions_icon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="15dp"
+                app:srcCompat="@drawable/ic_navigation_icon"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/directions"
+                android:textSize="20sp"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/primary_text"
+                android:textStyle="bold"
+                android:layout_marginStart="15dp"
+                />
+
+        </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="#c0c0c0"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@string/add_to_activity_planner"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:textColor="@color/icons"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:background="@drawable/rounded_orange_button"
+            android:layout_margin="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/description"
+            android:textColor="@color/primary_text"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            />
+
+        <TextView
+            android:id="@+id/description_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textSize="15sp"
+            android:textColor="@color/secondary_text"
+            android:text="@string/description_of_the_sports_facility"
+            android:maxLines="10"
+            android:scrollHorizontally="false"
+            android:ellipsize="none"
+            android:paddingBottom="10dp"
+            />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="#c0c0c0"/>
+
+</LinearLayout>
+
+</ScrollView>

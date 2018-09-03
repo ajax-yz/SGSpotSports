@@ -85,5 +85,12 @@
     <string name="change_your_image">Change your image</string>
     <string name="manage_your_list_of_markers">Manage your list of markers</string>
     <string name="name">Name</string>
+    <string name="facility_image">Facility Image</string>
+    <string name="facility_name">Facility Name</string>
+    <string name="phone">Phone</string>
+    <string name="directions">Directions</string>
+    <string name="add_to_activity_planner">Add to Activity Planner</string>
+    <string name="description">Description</string>
+    <string name="description_of_the_sports_facility">Description of the sports facility</string>
 
 </resources>

@@ -60,8 +60,10 @@ public class SettingsFragment extends Fragment {
     private TextView mName;
     private TextView mStatus;
 
-    private Button mStatusBtn;
-    private Button mImageBtn;
+    //private Button mStatusBtn;
+    //private Button mImageBtn;
+
+    private TextView mStatusTextBtn, mImageTextBtn, mManageMarkersBtn;
 
     private static final int GALLERY_PICK = 101;
     private static final int MAX_LENGTH = 10;
@@ -87,8 +89,15 @@ public class SettingsFragment extends Fragment {
         mName = (TextView) view.findViewById(R.id.settings_profile_name);
         mStatus = (TextView) view.findViewById(R.id.settings_profile_status);
 
+        /* Old code
         mStatusBtn = (Button) view.findViewById(R.id.button_change_status);
         mImageBtn = (Button) view.findViewById(R.id.button_change_image);
+        */
+
+        // New code
+        mStatusTextBtn = (TextView) view.findViewById(R.id.text_change_status);
+        mImageTextBtn = (TextView) view.findViewById(R.id.text_change_image);
+        mManageMarkersBtn = (TextView) view.findViewById(R.id.text_manage_markers);
 
         // Retrieving user uid
 
@@ -144,7 +153,7 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        mStatusBtn.setOnClickListener(new View.OnClickListener() {
+        mStatusTextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -154,13 +163,14 @@ public class SettingsFragment extends Fragment {
                 */
 
                 FragmentManager manager = getFragmentManager();
-                manager.beginTransaction().replace(R.id.fragment_container,
+                manager.beginTransaction().addToBackStack(null)
+                        .replace(R.id.fragment_container,
                         new StatusFragment()).commit();
 
             }
         });
 
-        mImageBtn.setOnClickListener(new View.OnClickListener() {
+        mImageTextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -176,6 +186,16 @@ public class SettingsFragment extends Fragment {
                         .setAspectRatio(1, 1)
                         .start(getActivity());
                         */
+
+            }
+        });
+
+        mManageMarkersBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(getContext(), "Opening list of markers", Toast.LENGTH_SHORT).show();
+                // Send to manage user's marker fragment
 
             }
         });

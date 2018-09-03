@@ -139,7 +139,7 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
                                                 //SetupSetupFragment setupFragment = new SetupSetupFragment();
                                                 FragmentManager manager = getFragmentManager();
                                                 manager.beginTransaction().replace(R.id.fragment_container,
-                                                        new ProfileFragment()).commit();
+                                                        new SettingsFragment()).commit();
                                                 //Toast.makeText(getActivity(), "Successfully uploaded token", Toast.LENGTH_SHORT).show();
                                                 hideSoftKeyboard();
 
@@ -175,7 +175,7 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
             //SetupFragment accountFragment = new SetupSetupFragment();
             FragmentManager manager = getFragmentManager();
             manager.beginTransaction().replace(R.id.fragment_container,
-                    new ProfileFragment()).commit();
+                    new SettingsFragment()).commit();
         }
     }
 

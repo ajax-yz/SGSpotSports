@@ -133,63 +133,64 @@ public class RequestFragment extends Fragment {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                        requestType = dataSnapshot.child("request_type").getValue().toString();
+                        if (dataSnapshot.hasChild("request_type")) {
+                            requestType = dataSnapshot.child("request_type").getValue().toString();
 
-                        if (requestType.equals("sent")){
+                            if (requestType.equals("sent")){
 
-                            mUsersDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                mUsersDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                                    userName = dataSnapshot.child("name").getValue().toString();
-                                    userThumb = dataSnapshot.child("thumb_image").getValue().toString();
-                                    userStatus = dataSnapshot.child("status").getValue().toString();
-
-
-                                    requestsViewHolder.setName(userName);
-                                    requestsViewHolder.setUserImage(userThumb, getContext());
-                                    requestsViewHolder.setStatus(userStatus);
-
-                                    setRecyclerViewClickable(requestsViewHolder, list_user_id);
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                }
-                            });
-
-                        } else if (requestType.equals("received")) {
-
-                            mUsersDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                                    userName = dataSnapshot.child("name").getValue().toString();
-                                    userThumb = dataSnapshot.child("thumb_image").getValue().toString();
-                                    userStatus = dataSnapshot.child("status").getValue().toString();
+                                        userName = dataSnapshot.child("name").getValue().toString();
+                                        userThumb = dataSnapshot.child("thumb_image").getValue().toString();
+                                        userStatus = dataSnapshot.child("status").getValue().toString();
 
 
-                                    requestsViewHolder.setName(userName);
-                                    requestsViewHolder.setUserImage(userThumb, getContext());
-                                    requestsViewHolder.setStatus(userStatus);
+                                        requestsViewHolder.setName(userName);
+                                        requestsViewHolder.setUserImage(userThumb, getContext());
+                                        requestsViewHolder.setStatus(userStatus);
 
-                                    setRecyclerViewClickable(requestsViewHolder, list_user_id);
+                                        setRecyclerViewClickable(requestsViewHolder, list_user_id);
+                                    }
 
-                                }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    }
+                                });
 
-                                }
-                            });
+                            } else if (requestType.equals("received")) {
 
-                        } else {
+                                mUsersDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                            Log.d("REQUEST TYPE: ", requestType);
+                                        userName = dataSnapshot.child("name").getValue().toString();
+                                        userThumb = dataSnapshot.child("thumb_image").getValue().toString();
+                                        userStatus = dataSnapshot.child("status").getValue().toString();
 
+
+                                        requestsViewHolder.setName(userName);
+                                        requestsViewHolder.setUserImage(userThumb, getContext());
+                                        requestsViewHolder.setStatus(userStatus);
+
+                                        setRecyclerViewClickable(requestsViewHolder, list_user_id);
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+
+                            } else {
+
+                                Log.d("REQUEST TYPE: ", requestType);
+
+                            }
                         }
-
                     }
 
                     @Override
@@ -199,65 +200,6 @@ public class RequestFragment extends Fragment {
 
                     }
                 });
-
-
-                /*
-
-                mUsersDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                        userName = dataSnapshot.child("name").getValue().toString();
-                        userThumb = dataSnapshot.child("thumb_image").getValue().toString();
-                        userStatus = dataSnapshot.child("status").getValue().toString();
-
-
-                        requestsViewHolder.setName(userName);
-                        requestsViewHolder.setUserImage(userThumb, getContext());
-                        requestsViewHolder.setStatus(userStatus);
-
-                        requestsViewHolder.mView.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-
-                                CharSequence options[] = new CharSequence[]{"Accept/Decline Friend Request"};
-
-                                final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                                builder.setTitle("Please select:");
-                                builder.setItems(options, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-
-                                        if (which == 0) {
-
-                                            // Send user id to another fragment
-                                            UserProfileFragment userProfileFragment = new UserProfileFragment();
-                                            Bundle bundle = new Bundle();
-                                            bundle.putString("user_id", list_user_id);
-                                            userProfileFragment.setArguments(bundle);
-
-                                            FragmentManager manager = getFragmentManager();
-                                            manager.beginTransaction().replace(R.id.fragment_container,
-                                                    userProfileFragment).commit();
-
-                                        }
-
-                                    }
-                                });
-
-                                builder.show();
-
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-
-                */
 
             }
         };

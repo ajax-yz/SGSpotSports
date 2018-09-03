@@ -123,6 +123,12 @@ public class RequestFragment extends Fragment {
                 // list_user_id returning mavewonders id
                 Log.d("LIST USER ID: ", list_user_id);
 
+                /*
+                Redundant because can use the same if statements for both conditions,
+                since mCurrent User & LIST_USER_ID is dynamic
+                if (requestType.equals(sent) || requestType.equals(received)) {
+                 */
+
                 mRequestsDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -153,9 +159,9 @@ public class RequestFragment extends Fragment {
                                 }
                             });
 
-                        } else if(requestType.equals("received")) {
+                        } else if (requestType.equals("received")) {
 
-                            mUsersDatabase.child(mCurrent_user_id).addValueEventListener(new ValueEventListener() {
+                            mUsersDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 

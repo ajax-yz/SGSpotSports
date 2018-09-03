@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateFormat;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +21,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.Date;
+import java.util.Formatter;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -148,7 +151,8 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             String message_type = message.getType();
 
             // Set time
-            timeText.setText(DateUtils.formatDateTime(mContext, message.getTime(), 0));
+            timeText.setText(DateUtils.formatDateTime(mContext, message.getTime(),
+                    DateUtils.FORMAT_SHOW_TIME));
 
             // Set profile photo
             mUserDatabase = FirebaseDatabase.getInstance().getReference()
@@ -181,7 +185,7 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
                 messageText.setVisibility(View.INVISIBLE);
                 Picasso.get().load(message.getMessage())
-                        .placeholder(R.drawable.ic_default_avatar).into(messageImage);
+                        .placeholder(R.drawable.ic_blank_image).into(messageImage);
             }
 
         }
@@ -209,7 +213,8 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             String message_type = message.getType();
 
             // Set time
-            timeText.setText(DateUtils.formatDateTime(mContext, message.getTime(), 0));
+            timeText.setText(DateUtils.formatDateTime(mContext, message.getTime(),
+                    DateUtils.FORMAT_SHOW_TIME));
 
             // Set profile photo
             mUserDatabase = FirebaseDatabase.getInstance().getReference()

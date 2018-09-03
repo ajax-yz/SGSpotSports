@@ -127,7 +127,6 @@ public class MessagingActivity extends AppCompatActivity {
 
         mMessagesList = (RecyclerView) findViewById(R.id.messages_list);
         mRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_message_layout);
-
         mLinearLayout = new LinearLayoutManager(this);
 
         mMessagesList.setHasFixedSize(true);
@@ -252,14 +251,18 @@ public class MessagingActivity extends AppCompatActivity {
         });
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        Log.d("REQUEST CODE: ", String.valueOf(requestCode));
+        Log.d("RESULT CODE: ", String.valueOf(resultCode));
+
         if(requestCode == GALLERY_PICK && resultCode == RESULT_OK){
 
             Uri imageUri = data.getData();
+
+            Log.d("IMAGE URI: ", String.valueOf(imageUri));
 
             final String current_user_ref = "Messages/" + mCurrentUserId + "/" + mChatUser;
             final String chat_user_ref = "Messages/" + mChatUser + "/" + mCurrentUserId;
@@ -269,6 +272,7 @@ public class MessagingActivity extends AppCompatActivity {
 
             final String push_id = user_message_push.getKey();
 
+            Log.d("PUSH ID: ", push_id);
 
             StorageReference filepath = mImageStorage.child("message_images").child(push_id + ".jpg");
 
@@ -292,6 +296,8 @@ public class MessagingActivity extends AppCompatActivity {
                                 // String download_url = task.getResult().getDownloadUrl().toString();
                                 String download_url = uri.toString();
 
+                                Log.d("DOWNLOAD URL: ", download_url);
+
                                 Map messageMap = new HashMap();
                                 messageMap.put("message", download_url);
                                 messageMap.put("seen", false);
@@ -303,7 +309,11 @@ public class MessagingActivity extends AppCompatActivity {
                                 messageUserMap.put(current_user_ref + "/" + push_id, messageMap);
                                 messageUserMap.put(chat_user_ref + "/" + push_id, messageMap);
 
+                                Log.d("CURRENT USER REF: ", current_user_ref);
+                                Log.d("CHAT USER REF: ", chat_user_ref);
+
                                 mMessageView.getText().clear();
+                                // SET IMAGE VIEW TO IMAGE
 
                                 mRootRef.updateChildren(messageUserMap, new DatabaseReference.CompletionListener() {
                                     @Override
@@ -408,7 +418,7 @@ public class MessagingActivity extends AppCompatActivity {
 
         Query messageQuery = messageRef.limitToLast(mCurrentPage * TOTAL_ITEMS_TO_LOAD);
 
-        messageRef.addChildEventListener(new ChildEventListener() {
+        messageQuery.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
@@ -490,6 +500,12 @@ public class MessagingActivity extends AppCompatActivity {
 
             // Clears the message dialog after pressing send
             mMessageView.getText().clear();
+
+            mRootRef.child("Chat").child(mCurrentUserId).child(mChatUser).child("seen").setValue(true);
+            mRootRef.child("Chat").child(mCurrentUserId).child(mChatUser).child("timestamp").setValue(ServerValue.TIMESTAMP);
+
+            mRootRef.child("Chat").child(mChatUser).child(mCurrentUserId).child("seen").setValue(false);
+            mRootRef.child("Chat").child(mChatUser).child(mCurrentUserId).child("timestamp").setValue(ServerValue.TIMESTAMP);
 
             mRootRef.updateChildren(messageUserMap, new DatabaseReference.CompletionListener() {
                 @Override

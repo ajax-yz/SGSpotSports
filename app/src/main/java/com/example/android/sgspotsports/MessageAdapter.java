@@ -221,7 +221,7 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                     String image = dataSnapshot.child("thumb_image").getValue().toString();
-                    Picasso.get().load(image).placeholder(R.drawable.ic_default_avatar).into(profileImage);
+                    Picasso.get().load(image).placeholder(R.drawable.ic_blank_image).into(profileImage);
 
                 }
 

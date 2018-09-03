@@ -98,7 +98,6 @@ public class ChatsFragment extends Fragment {
                                 .setQuery(conversationQuery, Conv.class)
                                 .build();
 
-        //    = new FirebaseRecyclerAdapter<Friends, FriendsViewHolder>(options) {
 
         FirebaseRecyclerAdapter<Conv, ConvViewHolder> firebaseConvAdapter
                 = new FirebaseRecyclerAdapter<Conv, ConvViewHolder>(options) {

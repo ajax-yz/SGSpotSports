@@ -84,6 +84,7 @@ public class FriendsFragment extends Fragment {
 
             mFriendsList.setHasFixedSize(true);
             mFriendsList.setLayoutManager(new LinearLayoutManager(getContext()));
+            
     }
 
     @Override
@@ -193,7 +194,13 @@ public class FriendsFragment extends Fragment {
         friendsRecyclerViewAdapter.startListening();
 
     }
-
+    /* Consider including
+    @Override
+    public void onStop() {
+        super.onStop();
+        friendsRecyclerViewAdapter.stopListening();
+    }
+    */
 
     public static class FriendsViewHolder extends RecyclerView.ViewHolder {
 

@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -115,6 +116,8 @@ public class ChatsFragment extends Fragment {
 
                 final String list_user_id = getRef(position).getKey();
 
+                Log.d("LIST USER ID: ", list_user_id);
+
                 Query lastMessageQuery = mMessageDatabase.child(list_user_id).limitToLast(1);
 
                 lastMessageQuery.addChildEventListener(new ChildEventListener() {
@@ -124,6 +127,8 @@ public class ChatsFragment extends Fragment {
                         // If the message is seen, remove bold
                         String data = dataSnapshot.child("message").getValue().toString();
                         convViewHolder.setMessage(data, conv.isSeen());
+
+                        Log.d("DATA: ", data);
 
                     }
 
@@ -161,6 +166,7 @@ public class ChatsFragment extends Fragment {
                             String userOnline = dataSnapshot.child("online").getValue().toString();
                             convViewHolder.setUserOnline(userOnline);
 
+                            Log.d("USER ONLINE: ", userOnline);
                         }
 
                         convViewHolder.setName(userName);
@@ -175,6 +181,9 @@ public class ChatsFragment extends Fragment {
                                 chatIntent.putExtra("user_id", list_user_id);
                                 chatIntent.putExtra("user_name", userName);
                                 startActivity(chatIntent);
+
+                                Log.d("LIST USER ID: ", list_user_id);
+                                Log.d("USER NAME: ", userName);
 
                             }
                         });
@@ -192,8 +201,17 @@ public class ChatsFragment extends Fragment {
         };
 
         mConvList.setAdapter(firebaseConvAdapter);
+        firebaseConvAdapter.startListening();
 
     }
+
+    /* Consider including
+    @Override
+    public void onStop() {
+        super.onStop();
+        firebaseConvAdapter.stopListening();
+    }
+    */
 
     public static class ConvViewHolder extends RecyclerView.ViewHolder {
 

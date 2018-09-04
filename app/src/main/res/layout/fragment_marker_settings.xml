@@ -1,7 +1,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -29,7 +28,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/upload_image"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_centerHorizontal="true"
@@ -47,58 +46,77 @@
 
         </RelativeLayout>
 
-        <android.support.v7.widget.AppCompatSpinner
-            android:id="@+id/sports_type_drop_down_list"
-            android:layout_marginStart="18dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        </android.support.v7.widget.AppCompatSpinner>
+            <TextView
+                android:id="@+id/setting_facility_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginStart="18dp"
+                android:text="@string/facility_type"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/sports_type_drop_down_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                >
+
+            </android.support.v7.widget.AppCompatSpinner>
+
+        </LinearLayout>
+
 
         <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/facility_name_title"
-        android:layout_marginStart="18dp"
-        android:layout_marginBottom="5dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginStart="18dp"
+            android:text="@string/facility_name_title"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <EditText
             android:id="@+id/editTextFacilityName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
             android:background="@drawable/rounded_orange_transparent"
-            android:padding="10dp"
-            android:textSize="18sp"
             android:hint="@string/enter_the_facility_name"
-            android:inputType="textCapWords"/>
+            android:inputType="textCapWords"
+            android:padding="10dp"
+            android:textSize="18sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/description_2"
+            android:layout_marginBottom="5dp"
             android:layout_marginStart="18dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="5dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+            android:text="@string/description_2"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <EditText
             android:id="@+id/editTextDisplayName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
             android:background="@drawable/rounded_orange_transparent"
-            android:padding="10dp"
-            android:textSize="18sp"
+            android:gravity="start|top"
             android:hint="@string/enter_the_description_for_the_facility"
-            android:lines="5"
             android:inputType="textMultiLine"
-            android:gravity="start|top"/>
+            android:lines="5"
+            android:padding="10dp"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/marker_save"

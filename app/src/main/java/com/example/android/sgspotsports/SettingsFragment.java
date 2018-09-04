@@ -196,6 +196,10 @@ public class SettingsFragment extends Fragment {
 
                 Toast.makeText(getContext(), "Opening list of markers", Toast.LENGTH_SHORT).show();
                 // Send to manage user's marker fragment
+                FragmentManager manager = getFragmentManager();
+                manager.beginTransaction().addToBackStack(null)
+                        .replace(R.id.fragment_container,
+                                new ManageMarkersFragment()).commit();
 
             }
         });

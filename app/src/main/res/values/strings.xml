@@ -98,5 +98,7 @@
     <string name="description_2">Description:</string>
     <string name="enter_the_description_for_the_facility">Enter the description for the facility</string>
     <string name="save">Save</string>
+    <string name="type_of_sports">Type of Sports</string>
+    <string name="facility_type">Facility type:</string>
 
 </resources>

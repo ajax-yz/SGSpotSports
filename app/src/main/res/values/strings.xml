@@ -92,5 +92,6 @@
     <string name="add_to_activity_planner">Add to Activity Planner</string>
     <string name="description">Description</string>
     <string name="description_of_the_sports_facility">Description of the sports facility</string>
+    <string name="facility_address">Facility Address</string>
 
 </resources>

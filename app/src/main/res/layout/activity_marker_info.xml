@@ -60,6 +60,7 @@
                     android:textColor="@color/primary_text"
                     android:textSize="18sp" />
 
+                <!-- Text size is set to 0 to temporary hide it (invisible) -->
                 <TextView
                     android:id="@+id/places_api_name"
                     android:layout_width="wrap_content"
@@ -70,7 +71,7 @@
                     android:scrollHorizontally="false"
                     android:text="@string/facility_name"
                     android:textColor="@color/secondary_text"
-                    android:textSize="15sp"
+                    android:textSize="0sp"
                     android:visibility="invisible" />
 
             </LinearLayout>

@@ -110,9 +110,8 @@ public class MarkerSettingsFragment extends Fragment {
         initList();
 
         mAuth = FirebaseAuth.getInstance();
-        if (mAuth.getCurrentUser().getUid() != null) {
-            mCurrent_user_id = mAuth.getCurrentUser().getUid();
-        }
+
+        mCurrent_user_id = mAuth.getCurrentUser().getUid();
 
         mChooseImage = (ImageView) view.findViewById(R.id.upload_image);
         mButtonSave = (Button) view.findViewById(R.id.marker_save);
@@ -139,7 +138,6 @@ public class MarkerSettingsFragment extends Fragment {
 
                     // Store type into firebase (to decide which marker image to use)
                     // Toast.makeText(getContext(), selectedSportsType + " selected", Toast.LENGTH_SHORT).show();
-
             }
 
             @Override

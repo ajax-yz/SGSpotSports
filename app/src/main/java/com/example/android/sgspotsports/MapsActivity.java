@@ -19,6 +19,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,6 +59,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private String address;
     private LatLng latLng;
 
+    private ImageView mMyLocationBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -68,14 +71,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         super.onCreate(savedInstanceState);
 
-
         setContentView(R.layout.activity_maps);
+
+        mMyLocationBtn = (ImageView) findViewById(R.id.ic_get_location);
         resultText = (TextView) findViewById(R.id.dragg_result);
 
+        setMyLocationBtnClick();
         getLocationPermission();
-
         initMap();
-
         configureCameraIdle();
 
     }
@@ -126,6 +129,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             }
         };
+    }
+
+    private void setMyLocationBtnClick() {
+
+        mMyLocationBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getDeviceLocation();
+            }
+        });
     }
 
     private void initMap(){
@@ -257,4 +270,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        finish();
+    }
 }

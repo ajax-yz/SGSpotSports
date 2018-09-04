@@ -15,7 +15,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="Tap on the logo below to upload photo"
         android:textAlignment="center"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
@@ -26,8 +26,8 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="170dp"
-            android:layout_height="170dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_centerHorizontal="true"
             android:layout_margin="20dp"
             android:background="@drawable/ic_upload_photo"
@@ -43,29 +43,53 @@
 
     </RelativeLayout>
 
+    <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/facility_name_title"
+    android:layout_marginStart="18dp"
+    android:layout_marginBottom="5dp"
+    android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+
     <EditText
-        android:id="@+id/editTextDisplayName"
-        android:layout_width="300dp"
+        android:id="@+id/editTextFacilityName"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/rounded_orange_transparent"
         android:padding="10dp"
-        android:textSize="20sp"
-        android:hint="  Enter Your Profile Name" />
+        android:textSize="18sp"
+        android:hint="@string/enter_the_facility_name"
+        android:inputType="textCapWords"/>
 
     <TextView
-        android:id="@+id/textViewVerified"
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="Verified"
-        android:textColor="@color/google_blue"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+        android:text="@string/description_2"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
 
+    <EditText
+        android:id="@+id/editTextDisplayName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/rounded_orange_transparent"
+        android:padding="10dp"
+        android:textSize="18sp"
+        android:hint="@string/enter_the_description_for_the_facility"
+        android:lines="5"
+        android:inputType="textMultiLine"
+        android:gravity="start|top"/>
 
     <Button
-        android:id="@+id/buttonSave"
+        android:id="@+id/marker_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -73,8 +97,7 @@
         android:background="@drawable/rounded_button_solid"
         android:paddingLeft="55dp"
         android:paddingRight="55dp"
-        android:text="Save"
+        android:text="@string/save"
         android:textAllCaps="false" />
-
-
+    
 </LinearLayout>

@@ -93,5 +93,10 @@
     <string name="description">Description</string>
     <string name="description_of_the_sports_facility">Description of the sports facility</string>
     <string name="facility_address">Facility Address</string>
+    <string name="enter_the_facility_name">Enter the facility name</string>
+    <string name="facility_name_title">Facility Name:</string>
+    <string name="description_2">Description:</string>
+    <string name="enter_the_description_for_the_facility">Enter the description for the facility</string>
+    <string name="save">Save</string>
 
 </resources>

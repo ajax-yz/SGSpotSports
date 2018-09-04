@@ -86,8 +86,9 @@
         <activity
             android:name=".MessagingActivity"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".MarkerInfoActivity"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".MarkerInfoActivity" />
+        <activity android:name=".MapsActivity"></activity>
     </application>
 
 </manifest>

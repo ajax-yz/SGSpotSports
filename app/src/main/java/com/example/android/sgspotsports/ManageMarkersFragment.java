@@ -1,6 +1,7 @@
 package com.example.android.sgspotsports;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -42,13 +43,18 @@ public class ManageMarkersFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                // Access the marker settings (To add / edit)
+                // Access the marker settings (To delete / edit)
 
+                /*
                 // -------------- SUPPOSE TO OPEN UP GOOGLE MAP TO PASS LAT LNG FIRST --------------
                 FragmentManager manager = getFragmentManager();
                 manager.beginTransaction().addToBackStack(null)
                         .replace(R.id.fragment_container,
                                 new MarkerSettingsFragment()).commit();
+                */
+
+                Intent intent = new Intent(getActivity(), MapsActivity.class);
+                startActivity(intent);
 
             }
         });

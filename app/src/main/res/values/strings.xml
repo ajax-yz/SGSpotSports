@@ -100,5 +100,8 @@
     <string name="save">Save</string>
     <string name="type_of_sports">Type of Sports</string>
     <string name="facility_type">Facility type:</string>
+    <string name="tap_on_the_logo_below_to_upload_photo">Tap on the logo below to upload photo</string>
+    <string name="please_drag_map_to_your_address">Please drag map to your address..</string>
+    <string name="please_select_the_facility_s_location">Please select the facility\'s location</string>
 
 </resources>

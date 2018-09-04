@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.maps.MapFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -85,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // --------- For now the LocatorFragment has been changed to MapsFragment ------------------
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new MapsFragment()).commit();
+                    new LocatorFragment()).commit();
             //if (isServicesOK()) {
                 navigationView.setCheckedItem(R.id.nav_locator);
             //}
@@ -111,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction()
                         .addToBackStack(null)
                         .replace(R.id.fragment_container,
-                        new MapsFragment()).commit();
+                        new LocatorFragment()).commit();
                 break;
 
             case R.id.nav_planner:

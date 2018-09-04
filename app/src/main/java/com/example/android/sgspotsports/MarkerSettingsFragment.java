@@ -23,8 +23,11 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -36,6 +39,7 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -58,8 +62,11 @@ public class MarkerSettingsFragment extends Fragment {
 
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
+    private DatabaseReference mUserDatabase;
 
-    private StorageTask mUploadTask;
+    private StorageReference fileReference;
+
+    private UploadTask uploadTask;
 
     private FirebaseAuth mAuth;
 
@@ -97,11 +104,11 @@ public class MarkerSettingsFragment extends Fragment {
             */
 
         } else {
-            Toast.makeText(getContext(), "Unable to retrieve location data",Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Unable to retrieve location data", Toast.LENGTH_LONG).show();
         }
 
         return view;
-        
+
     }
 
     @Override
@@ -123,7 +130,8 @@ public class MarkerSettingsFragment extends Fragment {
 
         mStorageRef = FirebaseStorage.getInstance().getReference("Markers");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Markers");
-
+        mUserDatabase = FirebaseDatabase.getInstance().getReference()
+                .child("Users").child(mCurrent_user_id).child("Markers");
 
         // ------------------ Spinner method ------------------------
         Spinner spinnerMarkers = view.findViewById(R.id.sports_type_drop_down_list);
@@ -136,10 +144,10 @@ public class MarkerSettingsFragment extends Fragment {
 
                 MarkerItems selectedItem = (MarkerItems) parent.getItemAtPosition(position);
 
-                    selectedSportsType = selectedItem.getmSportsType();
+                selectedSportsType = selectedItem.getmSportsType();
 
-                    // Store type into firebase (to decide which marker image to use)
-                    // Toast.makeText(getContext(), selectedSportsType + " selected", Toast.LENGTH_SHORT).show();
+                // Store type into firebase (to decide which marker image to use)
+                // Toast.makeText(getContext(), selectedSportsType + " selected", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -168,7 +176,7 @@ public class MarkerSettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if (mUploadTask != null && mUploadTask.isInProgress()) {
+                if (uploadTask != null && uploadTask.isInProgress()) {
                     Toast.makeText(getContext(), "Upload in progress", Toast.LENGTH_SHORT).show();
                 } else {
                     uploadFile();
@@ -180,64 +188,83 @@ public class MarkerSettingsFragment extends Fragment {
 
     private void uploadFile() {
         if (mImageUri != null) {
-            StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
+            fileReference = mStorageRef.child(System.currentTimeMillis()
                     + "." + getFileExtension(mImageUri));
 
-            
+            uploadTask = fileReference.putFile(mImageUri);
 
-            mUploadTask = fileReference.putFile(mImageUri)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            Task<Uri> urlTask = uploadTask.continueWithTask
+                    (new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                         @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Handler handler = new Handler();
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    mProgressBar.setProgress(0);
-                                }
-                            }, 500);
-
-                            Toast.makeText(getContext(), "Upload successful", Toast.LENGTH_LONG).show();
-
-                            // Derive latLng, address, price rating************************************************
-                            mFacilityName = mFacilityNameText.getText().toString().trim();
-                            mDescription = mDescriptionText.getText().toString().trim();
-
-                            verifyEmptyEntries(mFacilityName, mDescription);
-
-                            String image_download_url = taskSnapshot.getStorage().getDownloadUrl().toString();
-
-
-                            // Make Markers object and tie to the uploadId
-                            Markers upload = new Markers(
-                                    latLng, mCurrent_user_id, mFacilityName, mDescription, image_download_url, address);
-
-                            // Creates a unique id
-                            String uploadId = mDatabaseRef.push().getKey();
-
-                            // Add to database
-                            mDatabaseRef.child(uploadId).setValue(upload);
+                        public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                            if (!task.isSuccessful()) { // throw task.getException();
+                                throw Objects.requireNonNull(task.getException());
+                            }
+                            // Continue with the task to get the download URL
+                            return fileReference.getDownloadUrl();
                         }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                            mProgressBar.setProgress((int) progress);
-                        }
-                    });
-        } else {
-            Toast.makeText(getContext(), "Please upload an image of the facility", Toast.LENGTH_SHORT).show();
+                    }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if (task.isSuccessful()) {
+
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                mProgressBar.setProgress(0);
+                            }
+                        }, 500);
+
+                        Toast.makeText(getContext(), "Upload successful", Toast.LENGTH_LONG).show();
+
+                        Uri downloadUri = task.getResult();
+                        String image_download_url = downloadUri.toString();
+
+                        // Derive latLng, address, price rating************************************************
+                        mFacilityName = mFacilityNameText.getText().toString().trim();
+                        mDescription = mDescriptionText.getText().toString().trim();
+
+                        verifyEmptyEntries(mFacilityName, mDescription);
+
+                        // Make Markers object and tie to the uploadId
+                        Markers upload = new Markers(
+                                latLng, mCurrent_user_id, mFacilityName, mDescription, image_download_url, address);
+
+                        // Creates a unique id
+                        String uploadId = mDatabaseRef.push().getKey();
+
+                        // Add to database
+                        mDatabaseRef.child(uploadId).setValue(upload);
+                        mUserDatabase.child(uploadId).setValue(upload);
+
+                    } else {
+                        // Handle failures
+                        // ...
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            uploadTask.addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                    double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                    mProgressBar.setProgress((int) progress);
+                }
+            });
+
+        }else{
+            Toast.makeText(getActivity(), "Please upload an image of the facility", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void verifyEmptyEntries(String mFacilityName, String mDescription){
+
+    private void verifyEmptyEntries(String mFacilityName, String mDescription) {
 
         if (mFacilityName.isEmpty()) {
 

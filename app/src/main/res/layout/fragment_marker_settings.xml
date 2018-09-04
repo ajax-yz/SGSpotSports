@@ -116,7 +116,7 @@
             android:background="@drawable/rounded_orange_transparent"
             android:gravity="start|top"
             android:hint="@string/enter_the_description_for_the_facility"
-            android:inputType="textMultiLine"
+            android:inputType="textMultiLine|textCapSentences"
             android:lines="5"
             android:padding="10dp"
             android:textSize="18sp" />

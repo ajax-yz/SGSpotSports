@@ -45,16 +45,11 @@ public class ManageMarkersFragment extends Fragment {
 
                 // Access the marker settings (To delete / edit)
 
-                /*
                 // -------------- SUPPOSE TO OPEN UP GOOGLE MAP TO PASS LAT LNG FIRST --------------
                 FragmentManager manager = getFragmentManager();
                 manager.beginTransaction().addToBackStack(null)
                         .replace(R.id.fragment_container,
-                                new MarkerSettingsFragment()).commit();
-                */
-
-                Intent intent = new Intent(getActivity(), MapsActivity.class);
-                startActivity(intent);
+                                new MapsFragment()).commit();
 
             }
         });

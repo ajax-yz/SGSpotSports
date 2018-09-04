@@ -1,18 +1,69 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MapsFragment">
+    android:layout_height="match_parent">
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/LocatorMap"
+        xmlns:tools="http://schemas.android.com/tools"
         tools:context=".MapsActivity"
-        android:name="com.google.android.gms.maps.SupportMapFragment" />
+        />
+
+    <TextView
+        android:id="@+id/picker_title"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:textAlignment="center"
+        android:textColor="@color/primary_text"
+        android:background="@drawable/rounded_orange_white_button"
+        android:text="@string/please_select_the_facility_s_location"
+        android:alpha="0.8"
+        android:padding="10dp"
+        android:textSize="18sp" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_default_pin"
+        />
+
+    <TextView
+        android:id="@+id/dragg_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#8c000000"
+        android:gravity="center_horizontal"
+        android:padding="20dp"
+        android:text="@string/please_drag_map_to_your_address"
+        android:textColor="#ffffff"
+        android:textSize="18sp"
+        android:clickable="true"
+        android:focusable="true"/>
+
+    <ImageView
+        android:contentDescription="@string/get_device_location"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="80dp"
+        android:padding="17.5dp"
+        android:scaleType="centerCrop"
+        android:id="@+id/ic_get_location"
+        android:src="@drawable/ic_gps"
+        android:background="@drawable/white_circular_background"
+        android:elevation="7dp"/>
 
 
-
-</FrameLayout>
+</RelativeLayout>

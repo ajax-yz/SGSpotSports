@@ -78,6 +78,8 @@ public class MarkerSettingsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_marker_settings, container, false);
 
@@ -87,10 +89,12 @@ public class MarkerSettingsFragment extends Fragment {
             address = bundle.getString("Address");
             latLng = bundle.getParcelable("LatLng");
 
+            /*
             Toast.makeText(getContext(), address, Toast.LENGTH_LONG).show();
             Log.d("ADDRESS : ", address);
             Toast.makeText(getContext(), String.valueOf(latLng), Toast.LENGTH_LONG).show();
             Log.d("LatLng : ", String.valueOf(latLng));
+            */
 
         } else {
             Toast.makeText(getContext(), "Unable to retrieve location data",Toast.LENGTH_LONG).show();
@@ -178,6 +182,8 @@ public class MarkerSettingsFragment extends Fragment {
         if (mImageUri != null) {
             StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
                     + "." + getFileExtension(mImageUri));
+
+            
 
             mUploadTask = fileReference.putFile(mImageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {

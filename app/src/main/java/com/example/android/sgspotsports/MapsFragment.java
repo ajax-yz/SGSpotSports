@@ -123,13 +123,17 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                                 @Override
                                 public void onClick(View v) {
 
+                                    Double lat = latLng.latitude;
+                                    Double lng = latLng.longitude;
 
                                     // Sending LatLng and address to MarkerSettingsFragment
                                     MarkerSettingsFragment markerSettingsFragment =
                                             new MarkerSettingsFragment();
 
                                     Bundle bundle = new Bundle();
-                                    bundle.putParcelable("LatLng", latLng);
+                                    bundle.putDouble("Lat", lat);
+                                    bundle.putDouble("Lng", lng);
+                                    //bundle.putParcelable("Lat", lat);
                                     bundle.putString("Address", address);
                                     markerSettingsFragment.setArguments(bundle);
 

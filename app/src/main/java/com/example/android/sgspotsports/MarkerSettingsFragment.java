@@ -76,6 +76,7 @@ public class MarkerSettingsFragment extends Fragment {
     private String mCurrent_user_id;
     private String mFacilityName, mDescription;
     private LatLng latLng;
+    private Double lat, lng;
     private String address;
 
     public MarkerSettingsFragment() {
@@ -94,7 +95,10 @@ public class MarkerSettingsFragment extends Fragment {
         Bundle bundle = getArguments();
         if (bundle != null) {
             address = bundle.getString("Address");
-            latLng = bundle.getParcelable("LatLng");
+            lat = bundle.getDouble("Lat");
+            lng = bundle.getDouble("Lng");
+
+            //latLng = bundle.getParcelable("LatLng");
 
             /*
             Toast.makeText(getContext(), address, Toast.LENGTH_LONG).show();
@@ -229,14 +233,28 @@ public class MarkerSettingsFragment extends Fragment {
 
                         // Make Markers object and tie to the uploadId
                         Markers upload = new Markers(
-                                latLng, mCurrent_user_id, mFacilityName, mDescription, image_download_url, address);
+                                lat, lng, mCurrent_user_id, mFacilityName, mDescription, image_download_url, address, selectedSportsType);
 
                         // Creates a unique id
                         String uploadId = mDatabaseRef.push().getKey();
 
                         // Add to database
                         mDatabaseRef.child(uploadId).setValue(upload);
-                        mUserDatabase.child(uploadId).setValue(upload);
+                        mUserDatabase.child(uploadId).setValue(upload).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+
+                                    getFragmentManager().beginTransaction()
+                                            .addToBackStack(null)
+                                            .replace(R.id.fragment_container,
+                                                    new ManageMarkersFragment()).commit();
+
+                                } else {
+                                    Toast.makeText(getContext(), "Failed to update database", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
 
                     } else {
                         // Handle failures

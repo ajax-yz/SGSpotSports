@@ -37,7 +37,7 @@ import com.google.android.gms.tasks.Task;
 import java.io.IOException;
 import java.util.List;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private static final String TAG = "MapsActivity";
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
@@ -104,6 +104,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 @Override
                                 public void onClick(View v) {
 
+
                                     // Sending LatLng and address to MarkerSettingsFragment
                                     MarkerSettingsFragment markerSettingsFragment =
                                             new MarkerSettingsFragment();
@@ -118,6 +119,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                             .addToBackStack(null)
                                             .replace(R.id.fragment_container,
                                                     markerSettingsFragment).commit();
+
+
+
+                                    /*
+                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                    intent.putExtra("Address", address);
+                                    intent.putExtra("LatLng", latLng);
+                                    MapsActivity.this.startActivity(intent);
+                                    finish();
+                                    */
+
                                 }
                             });
                         }

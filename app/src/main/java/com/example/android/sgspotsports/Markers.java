@@ -11,13 +11,15 @@ public class Markers {
     public Markers() {
     }
 
-    public Markers(LatLng latLng, String marker_id, String owner_id, String facility_name, String description, String imageUrl) {
+
+
+    public Markers(LatLng latLng, String owner_id, String facility_name, String description, String imageUrl, String address) {
         this.latLng = latLng;
-        this.marker_id = marker_id;
         this.owner_id = owner_id;
         this.facility_name = facility_name;
         this.description = description;
         this.imageUrl = imageUrl;
+        this.address = address;
     }
 
     public Markers(LatLng latLng, String marker_id, String owner_id, String facility_name, String description, String imageUrl, String address, String building_name, String rating) {

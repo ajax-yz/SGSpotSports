@@ -76,9 +76,12 @@ public class MarkerSettingsFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        view = inflater.inflate(R.layout.fragment_marker_settings, container, false);
 
+        // Getting data from the map picker
         Bundle bundle = getArguments();
         if (bundle != null) {
             address = bundle.getString("Address");
@@ -88,16 +91,11 @@ public class MarkerSettingsFragment extends Fragment {
             Log.d("ADDRESS : ", address);
             Toast.makeText(getContext(), String.valueOf(latLng), Toast.LENGTH_LONG).show();
             Log.d("LatLng : ", String.valueOf(latLng));
-        } else {
-            Toast.makeText(getContext(), "bundle is empty",Toast.LENGTH_LONG).show();
-        }
-    }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_marker_settings, container, false);
+        } else {
+            Toast.makeText(getContext(), "Unable to retrieve location data",Toast.LENGTH_LONG).show();
+        }
+
         return view;
         
     }
@@ -201,13 +199,18 @@ public class MarkerSettingsFragment extends Fragment {
 
                             verifyEmptyEntries(mFacilityName, mDescription);
 
+                            String image_download_url = taskSnapshot.getStorage().getDownloadUrl().toString();
+
+
                             // Make Markers object and tie to the uploadId
+                            Markers upload = new Markers(
+                                    latLng, mCurrent_user_id, mFacilityName, mDescription, image_download_url, address);
 
                             // Creates a unique id
                             String uploadId = mDatabaseRef.push().getKey();
 
                             // Add to database
-                            mDatabaseRef.child(uploadId).setValue(null);
+                            mDatabaseRef.child(uploadId).setValue(upload);
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {

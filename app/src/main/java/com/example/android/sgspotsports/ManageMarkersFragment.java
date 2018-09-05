@@ -146,18 +146,18 @@ public class ManageMarkersFragment extends Fragment implements MarkersAdapter.On
 
     @Override
     public void onItemClick(int position) {
-        Toast.makeText(getContext(), "Normal click at position: " + position, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), "Normal click at position: " + position, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onWhatEverClick(int position) {
-        Toast.makeText(getContext(), "Whatever click at position: " + position, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), "Whatever click at position: " + position, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onDeleteClick(int position) {
 
-        Toast.makeText(getContext(), "Deleting" + position, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Deleting", Toast.LENGTH_SHORT).show();
 
         Markers selectedItem = mMarkersList.get(position);
         final String selectedKey = selectedItem.getmKey();

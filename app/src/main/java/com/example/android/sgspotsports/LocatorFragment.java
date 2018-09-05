@@ -222,7 +222,7 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback,
                                 .snippet(markers.getDescription())
                                 .icon(icon);
 
-                        mMap.addMarker(markerOptions);
+                        Marker marker = mMap.addMarker(markerOptions);
 
                     } catch (Exception ex) {
                         Toast.makeText(getContext(), ex.getMessage(), Toast.LENGTH_SHORT).show();

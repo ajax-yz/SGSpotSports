@@ -155,12 +155,9 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/directions_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:clickable="true"
-                android:focusable="true"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -172,11 +169,14 @@
                     app:srcCompat="@drawable/ic_navigation_icon" />
 
                 <TextView
+                    android:id="@+id/directions_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="13dp"
                     android:text="@string/directions"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:textColor="@color/primary_text"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -191,6 +191,7 @@
             android:background="#c0c0c0" />
 
         <Button
+            android:id="@+id/add_to_planner"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_margin="10dp"

@@ -6,6 +6,9 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -54,13 +57,23 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.io.IOException;
+import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -95,6 +108,12 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback,
     private Marker mMarker;
     private SupportMapFragment mapFragment;
 
+    //Firebase and Auth
+    private DatabaseReference mDatabaseRef;
+    private FirebaseAuth mAuth;
+    private String mCurrent_user_id;
+    private ValueEventListener mDBListener;
+
     // widgets
     private AutoCompleteTextView mSearchText;
     private ImageView mGps, mInfo, mPlacePicker;
@@ -123,6 +142,13 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback,
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.locator);
         */
+        if (mAuth != null) {
+            mAuth = FirebaseAuth.getInstance();
+            mCurrent_user_id = mAuth.getCurrentUser().getUid();
+        }
+
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("Markers");
+        mDatabaseRef.keepSynced(true);
 
         mSearchText = (AutoCompleteTextView) view.findViewById(R.id.input_search);
         mGps = (ImageView) view.findViewById(R.id.ic_gps);
@@ -130,6 +156,7 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback,
         mPlacePicker = (ImageView) view.findViewById(R.id.place_picker);
 
         getLocationPermission();
+        populateMarkers();
     }
 
     @Override
@@ -167,6 +194,118 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback,
          *mMap.addMarker(option);
          *mMap.moveCamera(CameraUpdateFactory.newLatLng(point));
          */
+    }
+
+    private void populateMarkers() {
+
+        //Retrieve markers
+        mDBListener = mDatabaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                mMap.clear();
+
+                for (DataSnapshot markersSnapshot : dataSnapshot.getChildren()) {
+
+                    final Markers markers = markersSnapshot.getValue(Markers.class);
+
+                    try {
+                        //int size = (int) dataSnapshot.getChildrenCount();
+                        LatLng coordinates = new LatLng(markers.getLat(), markers.getLng());
+
+                        BitmapDescriptor icon = getIcon(markers.getFacility_type());
+
+                        MarkerOptions markerOptions = new MarkerOptions()
+                                .position(coordinates)
+                                .title(markers.getFacility_name())
+                                .snippet(markers.getDescription())
+                                .icon(icon);
+
+                        Marker marker = mMap.addMarker(markerOptions);
+
+                    } catch (Exception ex) {
+                        Toast.makeText(getContext(), ex.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                        @Override
+                        public boolean onMarkerClick(Marker marker) {
+
+                            Intent intent = new Intent(getActivity(), MarkerInfoActivity.class);
+                            intent.putExtra("Markers", (Serializable) markers);
+                            startActivity(intent);
+
+                            return true;
+                        }
+                    });
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    private BitmapDescriptor getIcon(String sportsType) {
+
+        BitmapDescriptor icon;
+        Drawable drawable;
+
+        switch (sportsType) {
+
+            case "Select type...":
+                drawable = getResources().getDrawable(R.drawable.ic_default_pin);
+                icon = getMarkerIconFromDrawable(drawable);
+                return icon;
+
+            case "Basketball":
+                drawable = getResources().getDrawable(R.drawable.ic_basketball_pin);
+                icon = getMarkerIconFromDrawable(drawable);
+                return icon;
+
+            case "Badminton":
+                drawable = getResources().getDrawable(R.drawable.ic_badminton_pin);
+                icon = getMarkerIconFromDrawable(drawable);
+                return icon;
+
+            case "Stadium":
+                drawable = getResources().getDrawable(R.drawable.ic_stadium_pin);
+                icon = getMarkerIconFromDrawable(drawable);
+                return icon;
+
+            case "Soccer":
+                drawable = getResources().getDrawable(R.drawable.ic_soccer_pin);
+                icon = getMarkerIconFromDrawable(drawable);
+                return icon;
+
+            case "Swimming":
+                drawable = getResources().getDrawable(R.drawable.ic_swim_pin);
+                icon = getMarkerIconFromDrawable(drawable);
+                return icon;
+
+            case "Fitness Corner":
+                drawable = getResources().getDrawable(R.drawable.ic_fitness_pin);
+                icon = getMarkerIconFromDrawable(drawable);
+                return icon;
+
+            default:
+                Log.d("MarkersViewHolder: ", "ERROR IN TYPE");
+        }
+        return null;
+    }
+
+    private BitmapDescriptor getMarkerIconFromDrawable(Drawable drawable) {
+        Canvas canvas = new Canvas();
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        canvas.setBitmap(bitmap);
+        drawable.setBounds(0, 0, (int) (drawable.getIntrinsicWidth() * 0.15), (int) (drawable.getIntrinsicHeight() * 0.15));
+        drawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 
     // Initialize
@@ -554,4 +693,9 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback,
         }
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mDatabaseRef.removeEventListener(mDBListener);
+    }
 }

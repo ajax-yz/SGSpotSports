@@ -73,6 +73,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -80,7 +81,7 @@ import java.util.List;
 import static android.support.v4.provider.FontsContractCompat.FontRequestCallback.RESULT_OK;
 
 public class LocatorFragment extends Fragment implements OnMapReadyCallback,
-    GoogleApiClient.OnConnectionFailedListener {
+    GoogleApiClient.OnConnectionFailedListener, Serializable {
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
@@ -210,9 +211,7 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback,
 
                     try {
                         //int size = (int) dataSnapshot.getChildrenCount();
-                        LatLng coordinates = new LatLng( (Double) markers.getLat(), (Double) markers.getLng());
-
-                        //Toast.makeText(getContext(), String.valueOf(coordinates), Toast.LENGTH_SHORT).show();
+                        LatLng coordinates = new LatLng(markers.getLat(), markers.getLng());
 
                         BitmapDescriptor icon = getIcon(markers.getFacility_type());
 
@@ -227,6 +226,25 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback,
                     } catch (Exception ex) {
                         Toast.makeText(getContext(), ex.getMessage(), Toast.LENGTH_SHORT).show();
                     }
+
+
+                    mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                        @Override
+                        public boolean onMarkerClick(Marker marker) {
+
+
+                            /*
+                            Intent intent = new Intent(getActivity(), MarkerInfoActivity.class);
+                            intent.putExtra("Markers", (Serializable) markers);
+                            startActivity(intent);
+                            */
+
+                            Intent intent = new Intent(getActivity(), MarkerInfoActivity.class);
+                            startActivity(intent);
+
+                            return true;
+                        }
+                    });
 
                 }
 
@@ -292,7 +310,7 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback,
         Canvas canvas = new Canvas();
         Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
         canvas.setBitmap(bitmap);
-        drawable.setBounds(0, 0, (int) (drawable.getIntrinsicWidth() * 0.15), (int) (drawable.getIntrinsicHeight() * 0.15));
+        drawable.setBounds(0, 0, (int) (drawable.getIntrinsicWidth() * 0.1), (int) (drawable.getIntrinsicHeight() * 0.1));
         drawable.draw(canvas);
         return BitmapDescriptorFactory.fromBitmap(bitmap);
     }

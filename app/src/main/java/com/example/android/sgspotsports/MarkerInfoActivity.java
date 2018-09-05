@@ -12,7 +12,7 @@ import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 
-public class MarkerInfoActivity extends AppCompatActivity {
+public class MarkerInfoActivity extends AppCompatActivity implements Serializable {
 
     private Markers markers;
     private ImageView mImageView;

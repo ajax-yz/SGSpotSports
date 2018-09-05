@@ -32,7 +32,7 @@ import com.google.firebase.database.ServerValue;
 
 import java.io.Serializable;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, Serializable{
 
     // Variable for navigation drawer
     private DrawerLayout drawer;

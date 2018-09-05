@@ -73,7 +73,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -207,11 +206,13 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback,
 
                 for (DataSnapshot markersSnapshot : dataSnapshot.getChildren()) {
 
-                    final Markers markers = markersSnapshot.getValue(Markers.class);
+                    Markers markers = markersSnapshot.getValue(Markers.class);
 
                     try {
                         //int size = (int) dataSnapshot.getChildrenCount();
-                        LatLng coordinates = new LatLng(markers.getLat(), markers.getLng());
+                        LatLng coordinates = new LatLng( (Double) markers.getLat(), (Double) markers.getLng());
+
+                        //Toast.makeText(getContext(), String.valueOf(coordinates), Toast.LENGTH_SHORT).show();
 
                         BitmapDescriptor icon = getIcon(markers.getFacility_type());
 
@@ -221,23 +222,11 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback,
                                 .snippet(markers.getDescription())
                                 .icon(icon);
 
-                        Marker marker = mMap.addMarker(markerOptions);
+                        mMap.addMarker(markerOptions);
 
                     } catch (Exception ex) {
                         Toast.makeText(getContext(), ex.getMessage(), Toast.LENGTH_SHORT).show();
                     }
-
-                    mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                        @Override
-                        public boolean onMarkerClick(Marker marker) {
-
-                            Intent intent = new Intent(getActivity(), MarkerInfoActivity.class);
-                            intent.putExtra("Markers", (Serializable) markers);
-                            startActivity(intent);
-
-                            return true;
-                        }
-                    });
 
                 }
 

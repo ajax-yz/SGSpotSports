@@ -12,7 +12,7 @@ import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 
-public class MarkerInfoActivity extends AppCompatActivity implements Serializable {
+public class MarkerInfoActivity extends AppCompatActivity {
 
     private Markers markers;
     private ImageView mImageView;
@@ -26,6 +26,7 @@ public class MarkerInfoActivity extends AppCompatActivity implements Serializabl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_marker_info);
 
+        /*
         markers = (Markers) getIntent().getSerializableExtra("Markers");
 
         mImageView = findViewById(R.id.facility_background_image);
@@ -64,6 +65,7 @@ public class MarkerInfoActivity extends AppCompatActivity implements Serializabl
 
             }
         });
+        */
 
     }
 }

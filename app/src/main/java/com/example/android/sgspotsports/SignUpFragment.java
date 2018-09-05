@@ -156,7 +156,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                                         mRegProgress.dismiss();
                                         //finish();
                                         getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                                new SetupFragment()).commit();
+                                                new SettingsFragment()).commit();
 
                                     }
                                 }

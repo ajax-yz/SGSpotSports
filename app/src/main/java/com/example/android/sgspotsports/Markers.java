@@ -1,6 +1,7 @@
 package com.example.android.sgspotsports;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.database.Exclude;
 
 public class Markers {
 
@@ -10,6 +11,8 @@ public class Markers {
     private String marker_id, owner_id, facility_name, description, imageUrl;
     private String address, facility_type;
     private String building_name, rating;
+
+    private String mKey;
 
     public Markers() {
     }
@@ -39,6 +42,16 @@ public class Markers {
         this.facility_type = facility_type;
         this.building_name = building_name;
         this.rating = rating;
+    }
+
+    @Exclude
+    public String getmKey() {
+        return mKey;
+    }
+
+    @Exclude
+    public void setmKey(String mKey) {
+        this.mKey = mKey;
     }
 
     public Double getLat() {

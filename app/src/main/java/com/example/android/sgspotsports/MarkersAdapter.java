@@ -21,6 +21,7 @@ public class MarkersAdapter extends RecyclerView.Adapter<MarkersViewHolder> {
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private DatabaseReference mUserDatabase;
     private List<Markers> mMarkersList;
+    private OnItemClickListener mListener;
 
     public MarkersAdapter(Context mContext, List<Markers> mMarkersList) {
         this.mContext = mContext;
@@ -55,5 +56,17 @@ public class MarkersAdapter extends RecyclerView.Adapter<MarkersViewHolder> {
     @Override
     public int getItemCount() {
         return mMarkersList.size();
+    }
+
+    public interface OnItemClickListener{
+        void onItemClick(int position);
+
+        void onWhatEverClick(int position);
+
+        void onDeleteClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
     }
 }

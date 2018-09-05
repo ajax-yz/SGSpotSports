@@ -2,18 +2,70 @@ package com.example.android.sgspotsports;
 
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 
-public class MarkersViewHolder extends RecyclerView.ViewHolder {
+public class MarkersViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
+        View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener{
 
     private View mView;
+    private MarkersAdapter.OnItemClickListener mListener;
 
     public MarkersViewHolder(View itemView) {
         super(itemView);
+
+        itemView.setOnClickListener(this);
+        itemView.setOnCreateContextMenuListener(this);
+
         mView = itemView;
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        if (mListener != null) {
+
+            int position = getAdapterPosition();
+            if (position != RecyclerView.NO_POSITION){
+
+                mListener.onItemClick(position);
+            }
+        }
+
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+
+        menu.setHeaderTitle("Select Action:");
+        MenuItem delete = menu.add(Menu.NONE, 1, 1, "Delete marker");
+        //MenuItem doWhatever = menu.add(Menu.NONE, 2, 2, "Something");
+        delete.setOnMenuItemClickListener(this);
+
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+
+        if (mListener != null) {
+
+            int position = getAdapterPosition();
+            if (position != RecyclerView.NO_POSITION){
+
+                switch (item.getItemId()) {
+                    case 1:
+                        mListener.onDeleteClick(position);
+                        return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     public void setFacilityName(String name) {

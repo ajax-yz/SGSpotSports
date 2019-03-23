@@ -60,7 +60,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAcLYlos0rQKO2ZCZLXZMfAHFsjGo4sdVo" />
+            android:value="AIzaSyAKM2vC9bOYCaFjWR-4QBBpAFsg5wikc1c" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -87,7 +87,7 @@
             android:name=".MessagingActivity"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MarkerInfoActivity" />
+        <activity android:name=".MarkerInfoActivity"/>
     </application>
 
 </manifest>

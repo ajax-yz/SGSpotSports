@@ -203,7 +203,7 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback,
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                mMap.clear();
+                //mMap.clear();
 
                 for (DataSnapshot markersSnapshot : dataSnapshot.getChildren()) {
 
@@ -212,6 +212,8 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback,
                     try {
                         //int size = (int) dataSnapshot.getChildrenCount();
                         LatLng coordinates = new LatLng(markers.getLat(), markers.getLng());
+
+                        Toast.makeText(getContext(), String.valueOf(coordinates), Toast.LENGTH_SHORT).show();
 
                         BitmapDescriptor icon = getIcon(markers.getFacility_type());
 

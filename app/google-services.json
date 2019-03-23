@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "853902253711",
+    "firebase_url": "https://sgspotsports.firebaseio.com",
+    "project_id": "sgspotsports",
+    "storage_bucket": "sgspotsports.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:853902253711:android:4d0a083820111376",
+        "android_client_info": {
+          "package_name": "com.example.android.sgspotsports"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "853902253711-bh4rq80qar9939ag1q57tg8i0oo0ad5d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android.sgspotsports",
+            "certificate_hash": "080b889e7cc5074c2777d5ceb49fef9270849e2c"
+          }
+        },
+        {
+          "client_id": "853902253711-e59gi4v39c9eku6n4s8thg9vim7eqnoe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgpD5DJvqHc85Dj2GUsWo_8ZBbFezm_Pw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "853902253711-e59gi4v39c9eku6n4s8thg9vim7eqnoe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

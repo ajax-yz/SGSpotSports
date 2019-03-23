@@ -213,7 +213,8 @@ public class LocatorFragment extends Fragment implements OnMapReadyCallback,
                         //int size = (int) dataSnapshot.getChildrenCount();
                         LatLng coordinates = new LatLng(markers.getLat(), markers.getLng());
 
-                        Toast.makeText(getContext(), String.valueOf(coordinates), Toast.LENGTH_SHORT).show();
+                        /* Removed Toast printing when populating the markers on the map */
+                        // Toast.makeText(getContext(), String.valueOf(coordinates), Toast.LENGTH_SHORT).show();
 
                         BitmapDescriptor icon = getIcon(markers.getFacility_type());
 

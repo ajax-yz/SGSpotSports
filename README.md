@@ -1,4 +1,14 @@
-## Independent Software Development Project (Orbital):
+<!-- Placeholders -->
+[Motivation & Target Audience](link)
+[User Stories](link)
+[Wireframe](link)
+[Features](link)
+[Future Tweaks](link)
+[Technology Used](link)
+[Support](link)
+
+
+# Independent Software Development Project (Orbital):
 
 ##  ![App Logo][logo] Application name: SG Spot Sports
 
@@ -9,5 +19,8 @@
 2. User Stories
 3. Wireframe
 4. Features
-5. Technology Used
-6. Future Tweaks
+5. Future Tweaks
+6. Technology Used
+7. Support
+
+##

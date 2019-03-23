@@ -1,11 +1,11 @@
 <!-- Placeholders -->
-[Motivation & Target Audience](link)
-[User Stories](link)
-[Wireframe](link)
-[Features](link)
-[Future Tweaks](link)
-[Technology Used](link)
-[Support](link)
+[Motivation & Target Audience](https://github.com/ajax-yz/SGSpotSports#motivation--target-audience)
+[User Stories](https://github.com/ajax-yz/SGSpotSports#user-stories)
+[Wireframe](https://github.com/ajax-yz/SGSpotSports#wireframe)
+[Features](https://github.com/ajax-yz/SGSpotSports#features)
+[Future Tweaks](https://github.com/ajax-yz/SGSpotSports#future-tweaks)
+[Technology Used](https://github.com/ajax-yz/SGSpotSports#technology-used)
+[Support](https://github.com/ajax-yz/SGSpotSports#support)
 
 
 # Independent Software Development Project (Orbital):

@@ -36,8 +36,8 @@ In today's society, the world is changing rapidly and people tend to lead a hect
 
 ### Typical User Flow:
 
-| Stage:                          | Action:                       |
-| ----------------------          |:----------------------------: |
+| Stages:                          | Actions:                       |
+| ----------------------           |:----------------------------: |
 | **Signup**                       | Sign up is needed to facilitate the Kaki (Buddy) system, and for users to contribute by registering markers to the map.  |
 | **Login**                        | Users will login to manage his network of friends, and list of markers.     |
 | **Edit Profile**                 | Users are able to set their profile picture, and change their status whenever they please.      |

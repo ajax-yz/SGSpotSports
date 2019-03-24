@@ -52,7 +52,7 @@ In today's society, the world is changing rapidly and people tend to lead a hect
 
 ### 4) Features
 
-1) Sports Facility Locator
+1. Sports Facility Locator
   - Users can easily view sports facilities around his/her vicinity through markers with icons indicating the type of sports facility.
 
   - Users may also search for a particular facility through the search function for extra convenience.
@@ -61,12 +61,12 @@ In today's society, the world is changing rapidly and people tend to lead a hect
 
   - Through Google Map API, we have also included a place picker function for users to see facilities around them that are already registered under Google Maps.
 
-2)	Active Lifestyle Planner
+2.	Active Lifestyle Planner
  - Enables the users to plan ahead to engage in a sports activity on a specific date set by the users.
 
  - Reminders can be set to alert the user before the actual date and time of the activity.
 
-3)	Kaki (Buddy) System
+3.	Kaki (Buddy) System
  - Users may choose to add each other as friends, to maintain in contact and motivate each other to stay active through regular invitations to engage in sports activities.
 
  - The Kaki system will enable users to chat with each other and arrange for future matches. This would encourage more social interaction within the society, and enable users to make new friends and meet people of the same passion.
@@ -77,7 +77,7 @@ In today's society, the world is changing rapidly and people tend to lead a hect
 > Due to timeline constraints and unforeseen errors in the system, certain features could not be fully accomplished yet.
 
 1. Search function
-  - Current search function could not search for markers registered by users, instead it only searches for markers officially registered in Google Maps.
+   - Current search function could not search for markers registered by users, instead it only searches for markers officially registered in Google Maps.
 
 
 2. Registration of markers
@@ -88,11 +88,66 @@ In today's society, the world is changing rapidly and people tend to lead a hect
  - XML layout has been established for facility information to display the facility name, address, picture, description, reviews, and buttons for phone, directions and add to activity planner.
  - However, due to technical errors, mapping of variable details have not been successful. Hence, the feature has yet to be accomplished.
 
-### 6) Technology Used
+### 6) Technology/Dependency Used
 
+#### Google Maps, Places, Routes SDK API documentation
+Link: [Click here to set up API](https://developers.google.com/maps/documentation/android-sdk/intro)
 
+```java
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    implementation 'com.android.support:design:27.1.1'
+    implementation "com.android.support:support-compat:27.1.1"
+    // Google Maps API
+    implementation 'com.google.android.gms:play-services-maps:15.0.1'
+    implementation 'com.google.android.gms:play-services-location:15.0.1'
+    implementation 'com.google.android.gms:play-services-places:15.0.1'
+    // Firebase
+    implementation 'com.google.firebase:firebase-core:16.0.1'
+    implementation 'com.google.firebase:firebase-firestore:17.1.0'
+    implementation 'com.google.firebase:firebase-auth:16.0.3'
+    implementation 'com.google.firebase:firebase-storage:16.0.1'
+    implementation 'com.google.firebase:firebase-database:16.0.1'
+    implementation 'com.google.firebase:firebase-messaging:17.3.0'
+    implementation 'com.android.support:multidex:1.0.3'
+
+    // Firebase UI
+    implementation 'com.firebaseui:firebase-ui-database:4.1.0'
+    implementation "android.arch.core:runtime:1.1.1"
+    implementation "android.arch.core:common:1.1.1"
+
+    // Glide (image upload)
+    implementation 'com.github.bumptech.glide:glide:4.7.1'
+    implementation 'com.android.support:support-v4:27.1.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
+
+    // Circle Image View
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+
+    // Crop Image
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.7.0'
+
+    // Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    // Okhttp library
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
+
+    // Image Compressor
+    implementation 'id.zelory:compressor:2.1.0'
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation 'com.android.support:cardview-v7:27.1.1'
+}
+
+apply plugin: 'com.google.gms.google-services'
+```
 
 ### 7) Support
 
 #### Contact me for any enquiries:
-Email: [c.yizhao7@gmail.com] 
+Email: c.yizhao7@gmail.com

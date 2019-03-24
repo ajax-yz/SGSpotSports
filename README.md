@@ -53,23 +53,23 @@ In today's society, the world is changing rapidly and people tend to lead a hect
 ## 4) Features
 
 1. Sports Facility Locator
-  - Users can easily view sports facilities around his/her vicinity through markers with icons indicating the type of sports facility.
+   - Users can easily view sports facilities around his/her vicinity through markers with icons indicating the type of sports facility.
 
-  - Users may also search for a particular facility through the search function for extra convenience.
+   - Users may also search for a particular facility through the search function for extra convenience.
 
-  - Clicking on the marker will reveal more detailed information about the facility such as the address and picture of the facility.
+   - Clicking on the marker will reveal more detailed information about the facility such as the address and picture of the facility.
 
-  - Through Google Map API, we have also included a place picker function for users to see facilities around them that are already registered under Google Maps.
+   - Through Google Map API, we have also included a place picker function for users to see facilities around them that are already registered under Google Maps.
 
-2.	Active Lifestyle Planner
- - Enables the users to plan ahead to engage in a sports activity on a specific date set by the users.
+2. Active Lifestyle Planner
+   - Enables the users to plan ahead to engage in a sports activity on a specific date set by the users.
 
- - Reminders can be set to alert the user before the actual date and time of the activity.
+   - Reminders can be set to alert the user before the actual date and time of the activity.
 
-3.	Kaki (Buddy) System
- - Users may choose to add each other as friends, to maintain in contact and motivate each other to stay active through regular invitations to engage in sports activities.
+3. Kaki (Buddy) System
+   - Users may choose to add each other as friends, to maintain in contact and motivate each other to stay active through regular invitations to engage in sports activities.
 
- - The Kaki system will enable users to chat with each other and arrange for future matches. This would encourage more social interaction within the society, and enable users to make new friends and meet people of the same passion.
+   - The Kaki system will enable users to chat with each other and arrange for future matches. This would encourage more social interaction within the society, and enable users to make new friends and meet people of the same passion.
 
 
 ## 5) Features yet to be implemented
@@ -86,6 +86,7 @@ In today's society, the world is changing rapidly and people tend to lead a hect
 
 3. Facility information
    - XML layout has been established for facility information to display the facility name, address, picture, description, reviews, and buttons for phone, directions and add to activity planner.
+
    - However, due to technical errors, mapping of variable details have not been successful. Hence, the feature has yet to be accomplished.
 
 ## 6) Technology/Dependency Used
@@ -93,7 +94,7 @@ In today's society, the world is changing rapidly and people tend to lead a hect
 ### Google Maps, Places, Routes SDK API documentation
 Link: [Click here to set up API](https://developers.google.com/maps/documentation/android-sdk/intro)
 
-```javascript
+```PYTHON
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:27.1.1'

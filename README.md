@@ -92,9 +92,10 @@ In today's society, the world is changing rapidly and people tend to lead a hect
 ## 6) Technology/Dependency Used 🔨
 
 ### Platform:
-```
-**Android Studio**
-```
+---
+[**Android Studio**](https://developer.android.com/studio)
+---
+
 ### Google Maps, Places, Routes SDK API documentation:
 Link: [Click here to set up API](https://developers.google.com/maps/documentation/android-sdk/intro)
 

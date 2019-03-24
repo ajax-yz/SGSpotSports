@@ -5,13 +5,13 @@
 [logo]: https://github.com/ajax-yz/SGSpotSports/blob/master/app/src/main/res/mipmap-mdpi/ic_launcher_round.png
 
 ### Table of Contents:
-1. [Motivation & Target Audience](https://github.com/ajax-yz/SGSpotSports#1-motivation--target-audience)
-2. [User Stories](https://github.com/ajax-yz/SGSpotSports#2-user-stories)
-3. [Wireframe](https://github.com/ajax-yz/SGSpotSports#3-wireframe)
-4. [Features](https://github.com/ajax-yz/SGSpotSports#4-features)
-5. [Feaures yet to be implemented](https://github.com/ajax-yz/SGSpotSports#5-features-yet-to-be-implemented)
-6. [Technology/Dependecy Used](https://github.com/ajax-yz/SGSpotSports#6-technologydependency-used)
-7. [Support](https://github.com/ajax-yz/SGSpotSports#7-support)
+1. [Motivation & Target Audience](https://github.com/ajax-yz/SGSpotSports#1-motivation--target-audience-)
+2. [User Stories](https://github.com/ajax-yz/SGSpotSports#2-user-stories-)
+3. [Wireframe](https://github.com/ajax-yz/SGSpotSports#3-wireframe-)
+4. [Features](https://github.com/ajax-yz/SGSpotSports#4-features-)
+5. [Feaures yet to be implemented](https://github.com/ajax-yz/SGSpotSports#5-features-yet-to-be-implemented-)
+6. [Technology/Dependecy Used](https://github.com/ajax-yz/SGSpotSports#6-technologydependency-used-)
+7. [Support](https://github.com/ajax-yz/SGSpotSports#7-support-)
 
 ## 1) Motivation & Target Audience 🎯
 

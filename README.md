@@ -81,12 +81,12 @@ In today's society, the world is changing rapidly and people tend to lead a hect
 
 
 2. Registration of markers
- - tend to be off the coordinates according to testing, and glitches whenever the map is being zoomed in and out
+   - tend to be off the coordinates according to testing, and glitches whenever the map is being zoomed in and out
 
 
 3. Facility information
- - XML layout has been established for facility information to display the facility name, address, picture, description, reviews, and buttons for phone, directions and add to activity planner.
- - However, due to technical errors, mapping of variable details have not been successful. Hence, the feature has yet to be accomplished.
+   - XML layout has been established for facility information to display the facility name, address, picture, description, reviews, and buttons for phone, directions and add to activity planner.
+   - However, due to technical errors, mapping of variable details have not been successful. Hence, the feature has yet to be accomplished.
 
 ## 6) Technology/Dependency Used
 

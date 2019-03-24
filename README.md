@@ -19,9 +19,9 @@ In today's society, the world is changing rapidly and people tend to lead a hect
 
 ### 2) User Stories
 
-1.	As a working adult, I would like to minimize the hassle of locating a nearby sports facility to engage in physical activity. Instead, I would like to spend more quality time exercising and achieving a healthy lifestyle.
+>1.	As a working adult, I would like to minimize the hassle of locating a nearby sports facility to engage in physical activity. Instead, I would like to spend more quality time exercising and achieving a healthy lifestyle.
 
-2.	As a young adult, I would like to keep an active and healthy lifestyle and achieving it through the sports that interest me would further motivate me to work harder towards my personal goals
+>2.	As a young adult, I would like to keep an active and healthy lifestyle and achieving it through the sports that interest me would further motivate me to work harder towards my personal goals
 
 3.	As a teenager/young children, sports activity is a great way to improve my physical fitness level and at the same time foster stronger bonds with my family and friends.
 

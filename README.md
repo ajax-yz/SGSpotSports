@@ -10,7 +10,7 @@
 3. [Wireframe](https://github.com/ajax-yz/SGSpotSports#3-wireframe)
 4. [Features](https://github.com/ajax-yz/SGSpotSports#4-features)
 5. [Future Tweaks](https://github.com/ajax-yz/SGSpotSports#5-features-yet-to-be-implemented)
-6. [Technology Used](https://github.com/ajax-yz/SGSpotSports#6-technology-used)
+6. [Technology/Dependecy Used](https://github.com/ajax-yz/SGSpotSports#6-technologydependency-used)
 7. [Support](https://github.com/ajax-yz/SGSpotSports#7-support)
 
 ### 1) Motivation & Target Audience

@@ -96,7 +96,7 @@ In today's society, the world is changing rapidly and people tend to lead a hect
 
 
 ### Google Maps, Places, Routes SDK API documentation:
-Link: [Click here to set up API](https://developers.google.com/maps/documentation/android-sdk/intro)
+Link: [**Click here to set up API**](https://developers.google.com/maps/documentation/android-sdk/intro)
 
 ### Dependecy:
 ```JAVA

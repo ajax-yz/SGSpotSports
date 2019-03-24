@@ -32,6 +32,8 @@ In today's society, the world is changing rapidly and people tend to lead a hect
 
 ### 3) Wireframe
 
+![Wireframe](https://github.com/ajax-yz/SGSpotSports/blob/master/ReadMe-Images/wireframe.png "Wireframe snapshot")
+
 ### 4) Features
 
 ### 5) Future Tweaks

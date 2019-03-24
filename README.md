@@ -1,10 +1,10 @@
-## Independent Software Development Project (Orbital):
+# Independent Software Development Project (Orbital):
 
-###  ![App Logo][logo] Application name: SG Spot Sports
+##  ![App Logo][logo] Application name: SG Spot Sports
 
 [logo]: https://github.com/ajax-yz/SGSpotSports/blob/master/app/src/main/res/mipmap-mdpi/ic_launcher_round.png
 
-##### Table of Contents:
+### Table of Contents:
 1. [Motivation & Target Audience](https://github.com/ajax-yz/SGSpotSports#1-motivation--target-audience)
 2. [User Stories](https://github.com/ajax-yz/SGSpotSports#2-user-stories)
 3. [Wireframe](https://github.com/ajax-yz/SGSpotSports#3-wireframe)
@@ -13,11 +13,11 @@
 6. [Technology/Dependecy Used](https://github.com/ajax-yz/SGSpotSports#6-technologydependency-used)
 7. [Support](https://github.com/ajax-yz/SGSpotSports#7-support)
 
-### 1) Motivation & Target Audience
+## 1) Motivation & Target Audience
 
 In today's society, the world is changing rapidly and people tend to lead a hectic lifestyle pursuing greater achievement. In the process, they tend to neglect their physical health due to several reasons such as feeling tired from work, lack of time to exercise, and etc. According to the World Health Organization, the prevalence of obesity across the globe has almost tripled between 1975 and 2016. Furthermore, studies found that the most significant weight gain occurs when people enter the workforce for full-time jobs. The increasing trend of obesity is worrying because its underlying impact would be a higher risk of developing obesity-related health problems such as diabetes, heart disease and stroke which would result in higher health cost for every country and reduced productivity. In view of this issue, our team came up with SG Spot Sports, a friendly mobile application designed to facilitate and ease the trouble of finding the right physical activities to participate and makes exercising a fun and interactive activity! The target audience for our application are broad, and includes anyone who are seeking an active lifestyle. 🏃
 
-### 2) User Stories
+## 2) User Stories
 
 1.	As a working adult, I would like to minimize the hassle of locating a nearby sports facility to engage in physical activity. Instead, I would like to spend more quality time exercising and achieving a healthy lifestyle.
 
@@ -30,11 +30,11 @@ In today's society, the world is changing rapidly and people tend to lead a hect
 5.	As an administrator, I would want to ensure a timely update on the availability of the sports facilities (undergoing renovation, and etc) and with the help of the users, we can ensure that the application would provide accurate details of the facilities available around the country.
 
 
-### 3) Wireframe
+## 3) Wireframe
 
 ![Wireframe](https://github.com/ajax-yz/SGSpotSports/blob/master/ReadMe-Images/wireframe.png "Wireframe snapshot")
 
-#### Typical User Flow:
+### Typical User Flow:
 
 | Stage:                          | Action:                       |
 | ----------------------          |:----------------------------: |
@@ -50,7 +50,7 @@ In today's society, the world is changing rapidly and people tend to lead a hect
 | **Contact friends**             | After finding the desired sports and facility, users can invite their friends by chatting with them through the messaging function |
 | **Set Reminder Alert**          | Once decided, users can conveniently set reminder alert through the activity planner tab to notify themselves of the upcoming sports activity.|
 
-### 4) Features
+## 4) Features
 
 1. Sports Facility Locator
   - Users can easily view sports facilities around his/her vicinity through markers with icons indicating the type of sports facility.
@@ -72,7 +72,7 @@ In today's society, the world is changing rapidly and people tend to lead a hect
  - The Kaki system will enable users to chat with each other and arrange for future matches. This would encourage more social interaction within the society, and enable users to make new friends and meet people of the same passion.
 
 
-### 5) Features yet to be implemented
+## 5) Features yet to be implemented
 
 > Due to timeline constraints and unforeseen errors in the system, certain features could not be fully accomplished yet.
 
@@ -88,9 +88,9 @@ In today's society, the world is changing rapidly and people tend to lead a hect
  - XML layout has been established for facility information to display the facility name, address, picture, description, reviews, and buttons for phone, directions and add to activity planner.
  - However, due to technical errors, mapping of variable details have not been successful. Hence, the feature has yet to be accomplished.
 
-### 6) Technology/Dependency Used
+## 6) Technology/Dependency Used
 
-#### Google Maps, Places, Routes SDK API documentation
+### Google Maps, Places, Routes SDK API documentation
 Link: [Click here to set up API](https://developers.google.com/maps/documentation/android-sdk/intro)
 
 ```java
@@ -147,7 +147,7 @@ dependencies {
 apply plugin: 'com.google.gms.google-services'
 ```
 
-### 7) Support
+## 7) Support
 
-#### Contact me for any enquiries:
+### Contact me for any enquiries:
 Email: c.yizhao7@gmail.com

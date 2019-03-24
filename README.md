@@ -93,7 +93,7 @@ In today's society, the world is changing rapidly and people tend to lead a hect
 ### Google Maps, Places, Routes SDK API documentation
 Link: [Click here to set up API](https://developers.google.com/maps/documentation/android-sdk/intro)
 
-```java
+```javascript
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:27.1.1'

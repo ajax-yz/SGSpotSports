@@ -9,7 +9,7 @@
 2. [User Stories](https://github.com/ajax-yz/SGSpotSports#2-user-stories)
 3. [Wireframe](https://github.com/ajax-yz/SGSpotSports#3-wireframe)
 4. [Features](https://github.com/ajax-yz/SGSpotSports#4-features)
-5. [Future Tweaks](https://github.com/ajax-yz/SGSpotSports#5-features-yet-to-be-implemented)
+5. [Feaures yet to be implemented](https://github.com/ajax-yz/SGSpotSports#5-features-yet-to-be-implemented)
 6. [Technology/Dependecy Used](https://github.com/ajax-yz/SGSpotSports#6-technologydependency-used)
 7. [Support](https://github.com/ajax-yz/SGSpotSports#7-support)
 

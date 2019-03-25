@@ -81,7 +81,7 @@ In today's society, the world is changing rapidly and people tend to lead a hect
 
 
 2. Registration of markers
-   - tend to be off the coordinates according to testing, and glitches whenever the map is being zoomed in and out
+   - Tend to be off the coordinates according to testing, and glitches whenever the map is being zoomed in and out
 
 
 3. Facility information

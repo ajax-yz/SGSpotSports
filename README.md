@@ -81,7 +81,7 @@ In today's society, the world is changing rapidly and people tend to lead a hect
 
 
 2. Registration of markers
-   - tend to be off the coordinates according to testing, and glitches whenever the map is being zoomed in and out
+   - Tend to be off the coordinates according to testing, and glitches whenever the map is being zoomed in and out
 
 
 3. Facility information
@@ -95,8 +95,8 @@ In today's society, the world is changing rapidly and people tend to lead a hect
 > [**Android Studio**](https://developer.android.com/studio)
 
 
-### Google Maps, Places, Routes SDK API documentation:
-Link: [**Click here to set up API**](https://developers.google.com/maps/documentation/android-sdk/intro)
+### Google Maps, Places, Routes SDK API documentations:
+> Link: [**Click here to set up API**](https://developers.google.com/maps/documentation/android-sdk/intro)
 
 ### Dependecy:
 ```JAVA

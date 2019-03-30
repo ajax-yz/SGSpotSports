@@ -1,6 +1,6 @@
 # Independent Software Development Project (Orbital):
 
-##  ![App Logo][logo] Application name: SG Spot Sports
+## Application name: SG Spot Sports ![App Logo][logo]
 
 [logo]: https://github.com/ajax-yz/SGSpotSports/blob/master/app/src/main/res/mipmap-mdpi/ic_launcher_round.png
 

@@ -98,7 +98,10 @@ In today's society, the world is changing rapidly and people tend to lead a hect
 ### Google Maps, Places, Routes SDK API documentations:
 > Link: [**Click here to set up API**](https://developers.google.com/maps/documentation/android-sdk/intro)
 
-### Dependecy:
+### Google Firebase (Database Structure):
+![Firebase](https://github.com/ajax-yz/SGSpotSports/blob/master/ReadMe-Images/sg-spot-sports-firebase.png "Firebase snapshot")
+
+### Dependency:
 ```JAVA
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])

@@ -99,7 +99,7 @@ In today's society, the world is changing rapidly and people tend to lead a hect
 > Link: [**Click here to set up API**](https://developers.google.com/maps/documentation/android-sdk/intro)
 
 ### Google Firebase (Database Structure):
-![Firebase](https://github.com/ajax-yz/SGSpotSports/blob/master/ReadMe-Images/sg-spot-sports-firebase.png "Firebase snapshot")
+![Firebase](https://github.com/ajax-yz/SGSpotSports/blob/master/ReadMe-Images/sg-spot-sports-firebase.PNG "Firebase snapshot")
 
 ### Dependency:
 ```JAVA

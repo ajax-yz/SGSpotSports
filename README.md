@@ -44,8 +44,8 @@ In today's society, the world is changing rapidly and people tend to lead a hect
 | **Manage/Create Markers**        | Under the manage list of markers, users can easily contribute by clicking on the add marker icon located at the bottom right. |
 | **Choose Location**              | Upon clicking the add marker, a map will be launched according to the device's location. Thereafter, users can register the sports facility around him to the map.      |
 | **Fill Up Details**              | Compulsory details and picture of the sports facility will have to be populated to indicate and describe the type of facility. Picture will be useful for other users to validate the authenticity of the marker     |
-| **Browse Nearby Markers**        | Once submitted, the markers would be synchronized and appear on the map for every users on the platform. |
-| **Search for Facility**          | There is a handy search function located at the main facility locator tab, for users to quickly search for his/her desired facility      |
+| **Browse Nearby Markers**        | Once submitted, the markers will be synchronized and appear on the map for every users on the platform. |
+| **Search for Facility**          | There is a handy search function located at the main facility locator tab, for users to quickly search for his/her desired sports facility      |
 | **Click Marker for Info**        | Markers can be clicked to display more information about the facility such as the address and picture.    |
 | **Contact friends**             | After finding the desired sports and facility, users can invite their friends by chatting with them through the messaging function |
 | **Set Reminder Alert**          | Once decided, users can conveniently set reminder alert through the activity planner tab to notify themselves of the upcoming sports activity.|

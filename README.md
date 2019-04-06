@@ -74,13 +74,14 @@ In today's society, the world is changing rapidly and people tend to lead a hect
 
 ## 5) Features yet to be Implemented 🔧
 
-> Due to timeline constraints and unforeseen errors in the system, certain features could not be fully accomplished yet.
+> Due to timeline constraints and unforeseen errors in the system, certain features could not be fully accomplished yet. These features will be worked on and completed in the near future.
 
 1. Search function
-   - Current search function could not search for markers registered by users, instead it only searches for markers officially registered in Google Maps.
+   - Current search function does not provide searching for markers registered by users, instead it searches for markers officially registered in Google Maps.
+   - It will be good to implement search function to find the particular user to add as friend and stay in contact. Currently users can only be added through manual searching under the all users tab.
 
 
-2. Registration of markers
+2. Registration of markers (Bugs to be fixed)
    - Tend to be off the coordinates according to testing, and glitches whenever the map is being zoomed in and out
 
 
